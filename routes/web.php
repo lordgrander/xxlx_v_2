@@ -7,7 +7,7 @@ use App\Http\Controllers\Start;
  
 
 Route::get('/',[Start::class, 'index'])->name('start'); 
-Route::get('/login',[Start::class, 'login']); 
+Route::get('/login',[Start::class, 'login'])->name('login'); 
 Route::post('/login-start',[Start::class, 'login_start'])->name('login.start');
 
 Route::get('/register',[Start::class, 'register'])->name('register');

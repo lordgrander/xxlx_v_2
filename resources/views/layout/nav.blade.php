@@ -52,16 +52,36 @@
         </div>
       </li>
       <li class="border-top my-3"></li>
-      <li class="mb-1">
-        <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
-          Account
-        </button>
-        <div class="collapse" id="account-collapse" style="">
-          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none text-white rounded">New...</a></li> 
-          </ul>
-        </div>
-      </li>
+      @if(session('user_id'))
+        <li class="mb-1">
+          <a href="{{ route('logout') }}">
+            <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
+              ອອກຈາກລະບົບ
+            </button>
+          </a>
+          <!-- <div class="collapse" id="account-collapse" style="">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+              <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none text-white rounded">New...</a></li> 
+            </ul>
+          </div> -->
+        </li>
+      @else
+        <li class="mb-1">
+          <a href="{{ route('login') }}">
+            <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
+              ເຂົ້າສູ່ລະບົບ
+            </button>
+          </a> 
+        </li>
+        <li class="mb-1">
+          <a href="{{ route('register') }}">
+            <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
+              ສະໝັກ
+            </button>
+          </a> 
+        </li>
+
+      @endif
     </ul>
 </div>
 
