@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BuyController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\Start;
+
+use App\Http\Controllers\AnotherController;
  
 
 Route::get('/',[Start::class, 'index'])->name('start'); 
@@ -28,3 +30,12 @@ Route::middleware('check_login')->group(function () {
 
 });
  
+
+Route::get('/another',[AnotherController::class, 'index'])->name('another');
+Route::get('/another/control',[AnotherController::class, 'control'])->name('another.control');
+Route::post('/another/control/status',[AnotherController::class, 'status'])->name('another.status');
+Route::post('/another/control/number',[AnotherController::class, 'number'])->name('another.number');
+Route::post('/save-number',[AnotherController::class, 'save_number'])->name('another.number.save');
+Route::post('/another/new',[AnotherController::class, 'new'])->name('another.number.new');
+
+
