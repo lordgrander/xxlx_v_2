@@ -28,8 +28,9 @@ class OrderController extends Controller
 {
     public function index()
     {  
-        $user_id = 1; 
+        $user_id = session('user_id');
         $buy_order = buy_order::where('user_id', $user_id)->orderby('id','DESC')->paginate(20, ['*'], 'page_name') ;
+ 
         return view('front.order.index',compact('buy_order'));
     }
 }

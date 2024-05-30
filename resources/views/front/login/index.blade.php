@@ -26,7 +26,7 @@
                             </div>
                         </div>
 
-                        <button class="w-100 btn btn-outline-danger btn-lg" type="submit">ເຂົ້າສູ່ລະບົບ</button>
+                        <button class="w-100 btn btn-outline-danger btn-lg xxx" type="submit">ເຂົ້າສູ່ລະບົບ</button>
                     </form>
                         <hr>
                         <a href="{{ route('register') }}">
@@ -47,6 +47,7 @@
         });
         $('form.needs-validation').submit(function(event) {
             event.preventDefault();
+                    $('.xxx').prop('disabled','disabled');
 
             // Get the form data
             var formData = {
@@ -70,10 +71,12 @@
                         window.location.href="{{ route('start') }}";
                     } else {
                         alert('ລະຫັດຜ່ານຫຼືໄອດີບໍ່ຖືກຕ້ອງ');
+                        $('.xxx').prop('disabled','');
                     }
                 },
                 error: function(error) {
                     console.log(error); 
+                    $('.xxx').prop('disabled','');
                 }
             });
         });

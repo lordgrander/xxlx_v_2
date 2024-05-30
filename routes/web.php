@@ -21,6 +21,7 @@ Route::middleware('check_login')->group(function () {
     Route::get('/2749/248/0302/4421/{index}',[BuyController::class, 'index'])->name('buy.run');
     Route::post('/2749/248/0302/4421/7799/{gain_number}',[BuyController::class, 'buy'])->name('buy.run.start');
     Route::get('/2749/248/0302/4421/7799/778/{id}',[BuyController::class, 'bill'])->name('bill.view.success');
+    Route::get('/2749/248/0302/4421/7799/778/{id}/{di}',[BuyController::class, 'bill_two'])->name('bill.view.success');
 
     Route::get('/2749/248/0302/4421',[BuyController::class, 'hightlow'])->name('buy.hight.low');
     Route::get('/2749/248/4421/0302',[BuyController::class, 'kickcool'])->name('buy.kick.cool');

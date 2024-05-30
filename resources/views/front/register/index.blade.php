@@ -70,7 +70,7 @@
 
 
                         <div class="text-center">
-                            <button class="w-100 btn btn-danger btn-lg text-white" type="submit">ຕົກລົງ</button>
+                            <button class="w-100 btn btn-danger btn-lg text-white xxx" type="submit">ຕົກລົງ</button>
                         </div>
                     </form>
                 </div> 
@@ -87,6 +87,7 @@
         $('#registration-form').submit(function (e) {
             e.preventDefault(); 
             loading_overlay();
+            $('.xxx').prop('disabled','disabled');
 
             $.ajax({
                 type: 'POST',
@@ -100,13 +101,24 @@
                     _token: '{{ csrf_token() }}',
                 },
                 success: function (response) {
+                    if(response.status=='Duplicate')
+                    {
 
-                    window.location.href = "{{ route('start') }}"; 
-                    loading_overlay_hide();
+                        loading_overlay_hide();
+                        $('.xxx').prop('disabled','');
+                        alert("ໄອດີນີ້ໄດ້ສະໝັກໄປແລ້ວ");
+                    }
+                    else
+                    {
+
+                        window.location.href = "{{ route('start') }}"; 
+                        loading_overlay_hide();
+                    }
 
                 },
                 error: function (error) {
                     loading_overlay_hide();
+                    $('.xxx').prop('disabled','');
                     if (error.status === 422) {
                         var errors = error.responseJSON.errors;
                         // Handle and display validation errors if needed.
