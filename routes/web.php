@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BuyController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\WalletController;
 use App\Http\Controllers\Start;
 
 use App\Http\Controllers\AnotherController;
@@ -28,6 +29,10 @@ Route::middleware('check_login')->group(function () {
 
 
     Route::get('/2749/22/54/21/4/5/6/215/2',[OrderController::class, 'index'])->name('buy.history');
+    Route::get('/2124/2136/2148',[WalletController::class, 'index'])->name('wallet.in');
+    Route::post('/2124/2136/2148/x',[WalletController::class, 'in_process'])->name('wallet.in.process');
+    Route::get('/2125/2137/2149',[WalletController::class, 'out'])->name('wallet.out');
+    Route::post('/2125/2137/2149/x',[WalletController::class, 'out_process'])->name('wallet.out.process');
 
 });
  

@@ -475,7 +475,6 @@
                 $('#my-modal').hide();
                 $('#my-modal-x').hide();
             });
-
             
             $('#all_animal_x').click(function() {
                 let add = `01,41,81,02,42,82,03,43,83,04,44,84,05,45,85,06,46,86,07,47,87,08,48,88,09,49,89,10,50,90,11,51,91,12,52,92,13,53,93,14,54,94,15,55,95,16,56,96,17,57,97,18,58,98,19,59,99,20,60,00,`;
@@ -485,38 +484,33 @@
                 $('#my-modal').hide();
                 $('#my-modal-x').hide();
             });
-
                  
             $('#animal_number').click(function() {
                 $('#overlayx').show();
                 $('#my-modal').show();
-            }); 
-
-            
+            });
                  
             $('#animal_number_x').click(function() {
                 $('#overlayx').show();
                 $('#my-modal-x').show();
-            }); 
+            });
 
             $('.close_modal').click(function() {
                  $('#'+ $(this).attr('data-id')).hide();
                  $('#overlayx').hide();
-            }); 
+            });
 
 
             $('#overlayx').click(function() {
                 $('#my-modal').hide();
                 $('#overlayx').hide();
-            }); 
-            
+            });
 
             $('#inputValues').keyup(function() {
                 if (event.keyCode === 13) {
                     $('#goButton').click();
                 }
             });
-
 
             $('#set_price').keyup(function() {
                 if (event.keyCode === 13) {
@@ -586,7 +580,6 @@
             $(document).on('click', '.btn-delete', function() {
                 $(this).closest('tr').remove();
             });
-
 
             $('#submit_data').click(function() {
                 if(confirm("ເລີ່ມແທງ?"))
@@ -700,7 +693,6 @@
 
                 } 
             });
-
         });
 
         function Comma(Num) {  

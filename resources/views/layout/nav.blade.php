@@ -26,7 +26,12 @@
         </button>
         <div class="collapse" id="dashboard-collapse" style="">
           <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none text-white rounded">Overview</a></li> 
+            <li><a href="{{ route('wallet.in') }}" class="link-body-emphasis d-inline-flex text-decoration-none text-white rounded">ຝາກເງິນ</a></li> 
+          </ul>
+        </div>
+        <div class="collapse" id="dashboard-collapse" style="">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            <li><a href="{{ route('wallet.out') }}" class="link-body-emphasis d-inline-flex text-decoration-none text-white rounded">ຖອນເງິນ</a></li> 
           </ul>
         </div>
       </li>
