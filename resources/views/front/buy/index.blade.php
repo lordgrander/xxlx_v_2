@@ -2,7 +2,6 @@
 
 <link rel="stylesheet" href="{{ asset('css/front-menu-list.css') }}">
 @section('content')  
-<div id="overlayx"></div> 
                          
 <div class="modal" id="my-modal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
@@ -504,6 +503,9 @@
             $('#overlayx').click(function() {
                 $('#my-modal').hide();
                 $('#overlayx').hide();
+                $(".sub-nav").css("display", "none");
+                $(".sub-nav").css("position", ""); 
+
             });
 
             $('#inputValues').keyup(function() {

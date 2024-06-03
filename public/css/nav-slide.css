@@ -14,6 +14,7 @@ body {
     overflow-x: auto;
     overflow-y: hidden;
   }
+
   .main-nav
   { 
     background-color:#d82108;
@@ -22,6 +23,8 @@ body {
     height: 100%;
     z-index: 10;
     top: 0;
+    border-radius: 0px 35px 0px 0px;
+    transition: all .25s ease;
   }
    
   .dropdown-toggle { outline: 0; }

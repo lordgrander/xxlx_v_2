@@ -85,7 +85,7 @@
                             @foreach($order_inout AS $r)
                                 <tr>
                                     <td class="text-center">{{ $r->Havebank->name }}</td>
-                                    <td class="text-center">WX-{{ $r->id }}</td>
+                                    <td class="text-center">I-{{ $r->id }}</td>
                                     <td class="text-right">{{ number_format($r->total) }} ກີບ</td>
                                     <td class="text-center">
                                         @if($r->status=='Waiting')

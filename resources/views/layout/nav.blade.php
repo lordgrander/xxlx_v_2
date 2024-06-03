@@ -27,11 +27,13 @@
         <div class="collapse" id="dashboard-collapse" style="">
           <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
             <li><a href="{{ route('wallet.in') }}" class="link-body-emphasis d-inline-flex text-decoration-none text-white rounded">ຝາກເງິນ</a></li> 
+            <li><a href="{{ route('wallet.out') }}" class="link-body-emphasis d-inline-flex text-decoration-none text-white rounded">ຖອນເງິນ</a></li> 
           </ul>
         </div>
         <div class="collapse" id="dashboard-collapse" style="">
           <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a href="{{ route('wallet.out') }}" class="link-body-emphasis d-inline-flex text-decoration-none text-white rounded">ຖອນເງິນ</a></li> 
+            <li><a href="{{ route('setting.profile') }}" class="link-body-emphasis d-inline-flex text-decoration-none text-white rounded">ແກ້ໄຂຂໍ້ມູນ</a></li> 
+            <li><a href="{{ route('setting.password') }}" class="link-body-emphasis d-inline-flex text-decoration-none text-white rounded">ປ່ຽນລະຫັດຜ່ານ</a></li> 
           </ul>
         </div>
       </li>
@@ -90,6 +92,7 @@
     </ul>
 </div>
 
+<div id="overlayx"></div>  
 
  
 
@@ -101,11 +104,14 @@
             var nav_sw = 0;
             // Show the container and overlay when the button is clicked
             $("#show-nav").click(function () { 
-                    $(".overlay").css("opacity", "0.7"); // Adjust opacity as needed
-                    $(".main-nav").css("width", "280");
-            
+                    $(".overlay").css("opacity", "0.7");
+                    $(".main-nav").css("width", "280"); // i want this gose from 0 to 280px for 1sec
+                     
                     $(".overlay").css("display", "block");
+                    $(".overlay").css("position", "fixed");
                     $(".sub-nav").css("display", "block"); 
+                    $(".sub-nav").css("position", "fixed"); 
+                    $('#overlayx').show();
             });
 
             // Hide the container and overlay when the close button is clicked
@@ -114,6 +120,10 @@
                 $(".overlay").css("display", "none"); 
                 $(".sub-nav").css("display", "none");
                 $(".main-nav").css("width", "0"); 
+                $(".overlay").css("position", "");
+                $(".sub-nav").css("position", ""); 
+                $('#overlayx').hide();
+
                 // setTimeout(function() {   }, 2000); 
             });
             

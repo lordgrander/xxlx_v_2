@@ -84,6 +84,6 @@ table.table-bordered > tbody > tr > td{
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.8);
-    z-index: 1040; /* Ensure it covers the page but is below the modal */
+    z-index: 1; /* Ensure it covers the page but is below the modal */
     display: none; /* Hidden by default */
 }

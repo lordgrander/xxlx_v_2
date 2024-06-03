@@ -28,7 +28,7 @@ class Start extends Controller
 {
     public function index()
     {
-        $box = box::orderby('created_at','DESC')->get();
+        $box = box::orderby('created_at','DESC')->paginate(31, ['*'], 'page_name');
         return view('welcome',compact('box'));
     }
 

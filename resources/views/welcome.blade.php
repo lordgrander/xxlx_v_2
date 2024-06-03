@@ -101,6 +101,9 @@
                                         <tfoot> 
                                         </tfoot>
                                     </table> 
+                                    <div class="item-pagination d-flex justify-content-center">
+                                        {{ $box->links('pagination.custom-pagination')  }}
+                                    </div>
                             </div>  
                         </div>
                     </div>

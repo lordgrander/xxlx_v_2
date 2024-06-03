@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BuyController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\WalletController;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\Start;
 
 use App\Http\Controllers\AnotherController;
@@ -33,6 +34,12 @@ Route::middleware('check_login')->group(function () {
     Route::post('/2124/2136/2148/x',[WalletController::class, 'in_process'])->name('wallet.in.process');
     Route::get('/2125/2137/2149',[WalletController::class, 'out'])->name('wallet.out');
     Route::post('/2125/2137/2149/x',[WalletController::class, 'out_process'])->name('wallet.out.process');
+    
+    Route::get('/20020025002120212/123',[SettingController::class, 'profile'])->name('setting.profile');
+    Route::post('/20020025002120212/123/x',[SettingController::class, 'profile_process'])->name('setting.profile.process');
+    
+    Route::get('/20020025002120212/321',[SettingController::class, 'password'])->name('setting.password');
+    Route::post('/20020025002120212/321/x',[SettingController::class, 'password_name_check'])->name('setting.password.name.check');
 
 });
  
