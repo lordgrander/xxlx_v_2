@@ -1,0 +1,89 @@
+@font-face {
+    font-family: lb;
+    src: url("fonts/phetsarath-bold.ttf");
+}
+@font-face {
+    font-family: lr;
+    src: url("fonts/Phetsarath-Regular_0.ttf");
+}
+
+@font-face {
+    font-family: noto;
+    src: url("fonts/NotoSansLao-Regular.ttf");
+}
+@font-face {
+    font-family: notob;
+    src: url("fonts/NotoSansLao-SemiBold.ttf");
+} 
+
+@font-face {
+    font-family: robo;
+    src: url("fonts/Roboto-Regular.ttf");
+}
+
+@font-face {
+    font-family: robob;
+    src: url("fonts/Roboto-Bold.ttf");
+} 
+
+body
+{
+    font-family: lr;
+    background-color: white;
+}
+
+.lb
+{
+    font-family: lb, 'robob';
+}
+
+.noto, noto
+{
+    font-family: 'noto','notol','Montserrat', 'robo';
+}
+
+.notob, notob
+{
+    font-family: 'notob','notolb','Montserrat', 'robob';
+}
+
+.simple-input
+{
+     background: #00000026; 
+}
+
+.first-animal
+{
+    margin-right:4px;
+}
+
+
+table.table-bordered{
+    border:1px solid black;
+    margin-top:20px;
+    min-width: 20px;
+}
+table.table-bordered > thead > tr > th{
+    border:1px solid black;
+    min-width: 20px;
+}
+table.table-bordered > tbody > tr > td{
+    border:1px solid black;
+    min-width: 20px;
+}
+
+.modal-body {
+    overflow-y: auto !important;
+    max-height: 70vh !important; /* Adjust the height as needed */
+}
+/* Overlay styling */
+#overlayx {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 1; /* Ensure it covers the page but is below the modal */
+    display: none; /* Hidden by default */
+}

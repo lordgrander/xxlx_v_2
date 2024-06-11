@@ -5,6 +5,9 @@ use App\Http\Controllers\BuyController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\WalletController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\AdminloginController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminWalletController;
 use App\Http\Controllers\Start;
 
 use App\Http\Controllers\AnotherController;
@@ -42,8 +45,25 @@ Route::middleware('check_login')->group(function () {
     Route::post('/20020025002120212/321/x',[SettingController::class, 'password_name_check'])->name('setting.password.name.check');
 
 });
+Route::get('/a/l',[AdminloginController::class, 'login'])->name('admin_login');
+Route::post('/a/l/start',[AdminloginController::class, 'start'])->name('admin.login.start');
  
+Route::middleware('check_admin_login')->group(function () {
+    Route::get('/a/l/i',[AdminController::class, 'index'])->name('admin.index');
 
+    Route::get('/a/l/deposit',[AdminController::class, 'deposit'])->name('admin.deposit');
+
+    Route::get('/a/l/withdrawal',[AdminController::class, 'withdrawal'])->name('admin.withdrawal');
+
+    Route::get('/a/l/order/list',[AdminController::class, 'order'])->name('admin.order');
+
+    Route::get('/a/l/order/wallet/withdraw/{id}/{totken}',[AdminWalletController::class, 'wallet_processing'])->name('admin.withdraw.select');
+    Route::post('/a/l/order/wallet/process',[AdminWalletController::class, 'wallet_process_start'])->name('wallet.process.start');
+    Route::get('/a/l/order/wallet/thing/{thing}',[AdminWalletController::class, 'wallet_thing'])->name('admin.wallet.thing'); 
+    Route::get('/a/l/order/wallet/thing/list/{thing}',[AdminWalletController::class, 'wallet_thing_list'])->name('admin.wallet.thing.list'); 
+
+    
+});
 Route::get('/another',[AnotherController::class, 'index'])->name('another');
 Route::get('/another/control',[AnotherController::class, 'control'])->name('another.control');
 Route::post('/another/control/status',[AnotherController::class, 'status'])->name('another.status');

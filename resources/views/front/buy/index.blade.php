@@ -305,6 +305,31 @@
     </div>
   </div>
 </div> 
+
+<div class="modal" id="my-modal-odd" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+         <table class="table table-bordered table-striped table-hover notob">
+            <tr>
+                <td colspan="2">
+                    <button class="btn btn-danger form-control" id="oddButton">ໝາຍເລກຄີກ</button>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <button class="btn btn-danger form-control" id="evenButton">ໝາຍເລກຄູ່</button>
+                </td>
+            </tr>
+             
+         </table>
+      </div>
+      <div class="modal-footer"> 
+        <button type="button" class="btn btn-secondary close_modal form-control" data-dismiss="modal"  data-id="my-modal-x">ປິດ</button>
+      </div>
+    </div>
+  </div>
+</div> 
 <div class="container">
      <div class="row"> 
         
@@ -315,6 +340,7 @@
                     @if($gain_number=='2')
                         <button class="btn btn-danger" id="animal_number">ເລືອກ 2 ປ່ອງ</button>
                         <button class="btn btn-danger" id="animal_number_x">ເລືອກ 3 ປ່ອງ</button>
+                        <button class="btn btn-danger" id="number_odd">ເລກລຸດ</button>
                     @else
                     @endif
                 </div>
@@ -326,7 +352,7 @@
                             <tr> 
                                 <td class="text-center"> 
                                     <input type="text" class="form-control simple-input" id="inputValues" placeholder="ປ້ອນເລກ" value="1,2,3,4,5,6,7,8,9">
-                                </td>
+                                </td> 
                                 <td class="text-right"> 
                                     <input type="text" class="form-control simple-input" placeholder="ຈຳນວນເງິນ" id="set_price" value="0"  onkeyup="javascript:this.value=Comma(this.value);">
                                 </td> 
@@ -494,10 +520,25 @@
                 $('#my-modal-x').show();
             });
 
+            $('#number_odd').click(function() {
+                $('#overlayx').show();
+                $('#my-modal-odd').show();
+            });
+
             $('.close_modal').click(function() {
                  $('#'+ $(this).attr('data-id')).hide();
                  $('#overlayx').hide();
+                 $('#my-modal-odd').hide();
             });
+
+            document.getElementById('oddButton').addEventListener('click', function() {
+                addOENumbers('odd');
+            });
+
+            document.getElementById('evenButton').addEventListener('click', function() {
+                addOENumbers('even');
+            });
+
 
 
             $('#overlayx').click(function() {
@@ -762,6 +803,19 @@
                     $('#display_total').html('ລວມ  : ' + number_format(total,'','',',') + ' ກີບ');  
                     return total;
                 } 
+        }
+
+        
+        function addOENumbers(type) {
+            let numbers = [];
+            for (let i = 1; i <= 99; i++) {
+                if (type === 'odd' && i % 2 !== 0) {
+                    numbers.push(i);
+                } else if (type === 'even' && i % 2 === 0) {
+                    numbers.push(i);
+                }
+            }
+            document.getElementById('inputValues').value = numbers.join(', ');
         }
     </script>
 @endsection

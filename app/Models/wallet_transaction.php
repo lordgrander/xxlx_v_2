@@ -16,7 +16,7 @@ class wallet_transaction extends Model
 
     // Define the fillable columns
     protected $fillable = [
-        'customer_id',
+        'user_id',
         'amount',
         'type',
         'status',
@@ -26,4 +26,10 @@ class wallet_transaction extends Model
         'admin', 
         // Add other fields as needed
     ];
+
+    
+    public function wHaveuser()
+    {
+        return $this->belongsTo(Users::class, 'user_id','id');
+    }
 }

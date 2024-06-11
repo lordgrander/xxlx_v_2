@@ -21,6 +21,8 @@ class order_inout extends Model
         'bank_transfer_id',
         'bank_number',
         'tran_id',
+        'token',
+        'cancel_reason',
     ];
 
     // public function bINbo()
@@ -30,5 +32,11 @@ class order_inout extends Model
     public function Havebank()
     {
         return $this->belongsTo(banks::class, 'bank_transfer_id','id');
+    }
+
+    
+    public function HaveUser()
+    {
+        return $this->belongsTo(Users::class, 'user_id','id');
     }
 }

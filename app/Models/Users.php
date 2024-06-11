@@ -35,4 +35,15 @@ class Users extends Model
     {
         return $this->hasMany(wallet_transaction::class, 'user_id');
     }
+
+    
+    public function userHaveW()
+    {
+        return $this->hasMany(wallet_transaction::class, 'user_id');
+    }
+    
+    public function userHaveO()
+    {
+        return $this->hasMany(order_inout::class, 'user_id');
+    }
 }
