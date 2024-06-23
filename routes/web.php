@@ -8,6 +8,7 @@ use App\Http\Controllers\SettingController;
 use App\Http\Controllers\AdminloginController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminWalletController;
+use App\Http\Controllers\AdminBoxController;
 use App\Http\Controllers\Start;
 
 use App\Http\Controllers\AnotherController;
@@ -50,17 +51,23 @@ Route::post('/a/l/start',[AdminloginController::class, 'start'])->name('admin.lo
  
 Route::middleware('check_admin_login')->group(function () {
     Route::get('/a/l/i',[AdminController::class, 'index'])->name('admin.index');
-
+    
     Route::get('/a/l/deposit',[AdminController::class, 'deposit'])->name('admin.deposit');
-
+    
     Route::get('/a/l/withdrawal',[AdminController::class, 'withdrawal'])->name('admin.withdrawal');
-
+    
     Route::get('/a/l/order/list',[AdminController::class, 'order'])->name('admin.order');
-
+    
     Route::get('/a/l/order/wallet/withdraw/{id}/{totken}',[AdminWalletController::class, 'wallet_processing'])->name('admin.withdraw.select');
     Route::post('/a/l/order/wallet/process',[AdminWalletController::class, 'wallet_process_start'])->name('wallet.process.start');
     Route::get('/a/l/order/wallet/thing/{thing}',[AdminWalletController::class, 'wallet_thing'])->name('admin.wallet.thing'); 
     Route::get('/a/l/order/wallet/thing/list/{thing}',[AdminWalletController::class, 'wallet_thing_list'])->name('admin.wallet.thing.list'); 
+    
+    Route::get('/a/l/b/c',[AdminBoxController::class, 'create'])->name('admin.create.box');
+    Route::post('/a/l/b/c/p',[AdminBoxController::class, 'create_process'])->name('box.create.start'); 
+    
+    Route::post('/a/l/b/t/p',[AdminBoxController::class, 'to_tell_process'])->name('box.tell.start'); 
+    Route::get('/a/l/b/c/w/{token}',[AdminBoxController::class, 'view_winner'])->name('box.see.winner'); 
 
     
 });

@@ -45,8 +45,10 @@ body
             <div class="card-header  text-center">
                 @if($select->type=='out')
                 <h3>ແຈ້ງຖອນ</h3>
+                
                 @elseif($select->type="in")
                 <h3>ແຈ້ງຝາກ</h3> 
+                
                 @else
                 @endif
             </div>

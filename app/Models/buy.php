@@ -12,6 +12,7 @@ class buy extends Model
     
     protected $table = 'buy';   
     protected $fillable = [  
+        'name',
         'user_id',
         'buy_order',
         'number',
@@ -19,10 +20,16 @@ class buy extends Model
         'type',
         'box_id',
         'created_at',
+        'wallet_id',
+        'mul',
     ];
 
     public function bINbo()
     {
         return $this->belongsTo(buy_order::class, 'buy_order','id');
+    }
+    public function bINUser()
+    {
+        return $this->belongsTo(Users::class, 'user_id','id');
     }
 }

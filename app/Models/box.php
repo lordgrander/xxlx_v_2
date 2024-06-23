@@ -16,5 +16,8 @@ class box extends Model
         'down',
         'created_at',
         'status',
+        'c_up',
+        'c_down',
+        'token',
     ];
 }

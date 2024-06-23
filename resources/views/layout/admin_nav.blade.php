@@ -59,7 +59,7 @@
         </button>
         <div class="collapse" id="create-collapse" style="">
           <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a href="{{ route('admin.order') }}" class="link-body-emphasis d-inline-flex text-decoration-none text-white rounded">4.1 ສ້າງ ງວດເລກ</a></li> 
+            <li><a href="{{ route('admin.create.box') }}" class="link-body-emphasis d-inline-flex text-decoration-none text-white rounded">4.1 ສ້າງ ງວດເລກ</a></li> 
             <li><a href="{{ route('admin.order') }}" class="link-body-emphasis d-inline-flex text-decoration-none text-white rounded">4.2 ສ້າງ ລູກຄ້າ</a></li> 
           @if(session('admin_status')=="Admin")
             <li><a href="{{ route('admin.order') }}" class="link-body-emphasis d-inline-flex text-decoration-none text-white rounded">4.3 ສ້າງ Admin</a></li> 

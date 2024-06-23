@@ -215,6 +215,7 @@ class BuyController extends Controller
                 }
 
                 $buy = new buy;
+                $buy->name = $name; 
                 $buy->buy_order = $buy_order->id;
                 $buy->user_id = $user_id;
                 $buy->number = $number;
@@ -315,6 +316,7 @@ class BuyController extends Controller
     
                 }
                 $buy = new buy;
+                $buy->name = $name;
                 $buy->buy_order = $buy_order->id;
                 $buy->user_id = $user_id;
                 $buy->number = $number;
