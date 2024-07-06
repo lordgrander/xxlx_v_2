@@ -86,7 +86,11 @@ body
                                             <td class="text-center">{{ date('d-m-Y',strtotime($r->created_at)) }}</td>
                                             <td class="text-right">{{ $r->up }}</td>
                                             <td class="text-right">{{ $r->down }}</td>
-                                            <td class="text-right"><a href="{{ route('box.see.winner', $r->token) }}">ເບີ່ງຜູ້ຊະນະ</a> </td>
+                                            <td class="text-right">
+                                                <a href="{{ route('admin.view.box', $r->id) }}">ເບີ່ງການຂາຍ</a>
+                                                &nbsp;|&nbsp;
+                                                <a href="{{ route('box.see.winner', $r->token) }}">ເບີ່ງຜູ້ຊະນະ</a> 
+                                            </td>
                                         </tr>
                                     @endif
                                 @endforeach
@@ -150,8 +154,8 @@ body
                         });
                     }
                     else
-                    {
-
+                    { 
+                        $('.accept').prop('disabled','');
                     }
             }); 
 

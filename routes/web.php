@@ -66,6 +66,9 @@ Route::middleware('check_admin_login')->group(function () {
     Route::get('/a/l/b/c',[AdminBoxController::class, 'create'])->name('admin.create.box');
     Route::post('/a/l/b/c/p',[AdminBoxController::class, 'create_process'])->name('box.create.start'); 
     
+    Route::get('/a/l/b/v/{id}',[AdminBoxController::class, 'view'])->name('admin.view.box');
+
+
     Route::post('/a/l/b/t/p',[AdminBoxController::class, 'to_tell_process'])->name('box.tell.start'); 
     Route::get('/a/l/b/c/w/{token}',[AdminBoxController::class, 'view_winner'])->name('box.see.winner'); 
 

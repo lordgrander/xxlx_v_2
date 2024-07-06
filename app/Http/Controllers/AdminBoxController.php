@@ -25,6 +25,7 @@ Use App\Models\box;
 Use App\Models\buy; 
 Use App\Models\wallet_transaction; 
 Use App\Models\prize; 
+Use App\Models\buy_order; 
  
 
 class AdminBoxController extends Controller
@@ -367,6 +368,14 @@ class AdminBoxController extends Controller
         {
 
         }
+    }
+
+    public function view($id)
+    {
+        
+        $buy_order = buy_order::where('box_id', $id)->orderby('id','DESC')->paginate(20, ['*'], 'page_name') ;
+ 
+        return view('back.box.view',compact('buy_order'));
     }
 
 }

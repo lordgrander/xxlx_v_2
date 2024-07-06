@@ -26,4 +26,8 @@ class buy_order extends Model
     {
         return $this->hasMany(buy::class, 'buy_order');
     }
+    public function bINUser()
+    {
+        return $this->belongsTo(Users::class, 'user_id','id');
+    }
 }
