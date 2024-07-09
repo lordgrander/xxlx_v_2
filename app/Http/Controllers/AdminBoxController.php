@@ -370,12 +370,51 @@ class AdminBoxController extends Controller
         }
     }
 
+    public function view_c()
+    {
+        $box_id = box::orderby('id','DESC')->limit(1)->get();
+      
+        $buy_order = buy_order::where('box_id', $box_id[0]->id)->orderby('id','DESC')->paginate(20, ['*'], 'page_name') ;
+ 
+        return view('back.box.view',compact('buy_order'))->with('id', $box_id[0]->id);
+    }
+
     public function view($id)
     {
         
         $buy_order = buy_order::where('box_id', $id)->orderby('id','DESC')->paginate(20, ['*'], 'page_name') ;
  
-        return view('back.box.view',compact('buy_order'));
+        return view('back.box.view',compact('buy_order'))->with('id', $id);
     }
+
+    public function view_search($id, $filter, $id_search)
+    {
+        $buy_order = buy_order::where('box_id', $id);
+    
+        if ($filter!='0') {
+            $buy_order->where('name', $filter);
+           
+        }
+    
+        if ($id_search!='0') {
+            $buy_order->where('id', $id_search);
+        }
+    
+        $buy_order = $buy_order->orderBy('id', 'DESC')->paginate(20, ['*'], 'page_name');
+    
+        return view('back.box.view', compact('buy_order'))->with('id', $id);
+    }
+    
+
+    public function view_total($id)
+    {
+        $results = Buy::select('user_id', 'name', DB::raw('SUM(price) AS total_price'))
+                        ->where('box_id',$id)
+                        ->groupBy('user_id', 'name')
+                        ->get();
+
+        return view('back.box.total',compact('results'));
+    }
+
 
 }

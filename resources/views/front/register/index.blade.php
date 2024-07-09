@@ -48,7 +48,7 @@
                                 
                     <form id="registration-form">   
                         
-                    <div class="mb-3">
+                        <div class="mb-3">
                             <input type="text" id="username" class="form-control" placeholder="ຊື່ຂອງທ່ານ" autocomplete="off" required style="border:solid black 2px;">
                         </div>
                         

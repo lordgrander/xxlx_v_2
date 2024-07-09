@@ -27,6 +27,7 @@ class Users extends Model
         'status', 
         'created_at', 
         'updated_at', 
+        'last_login_ip', 
         'encode', 
         // Add other fields as needed
     ];

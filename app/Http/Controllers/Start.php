@@ -51,7 +51,8 @@ class Start extends Controller
         if (Hash::check($password, $user->password)) {
             // Password matches, create session and return response
             session(['user_id' => $user->id, 'user_name' => $user->user_name, 'status' => $user->status, 'user_encode' => $user->encode]);
-
+            $user->last_login_ip = $request->ip(); // Get the user's IP address
+            $user->save();
             if(!$user->name)
             {
                 return response()->json(['success' => true]);
@@ -78,7 +79,7 @@ class Start extends Controller
         else
         {
             session()->flush(['user_id', 'user_name', 'user_encode','admin_id','admin_name','admin_status']);  
-            return redirect()->route('admin.login');  
+            return redirect()->route('admin_login');  
         }
     }
 

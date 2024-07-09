@@ -25,10 +25,9 @@
           2. ອໍເດີ້
         </button>
         <div class="collapse" id="dashboard-collapse" style="">
-          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a href="{{ route('admin.deposit') }}" class="link-body-emphasis d-inline-flex text-decoration-none text-white rounded">2.1 ອໍເດິ້ຊື້ເລກ</a></li> 
-            <li><a href="{{ route('admin.wallet.thing', 'in') }}" class="link-body-emphasis d-inline-flex text-decoration-none text-white rounded">2.2 ອໍເດິ້ຝາກເງິນ</a></li> 
-            <li><a href="{{ route('admin.wallet.thing', 'out') }}" class="link-body-emphasis d-inline-flex text-decoration-none text-white rounded">2.3 ອໍເດິ້ຖອນເງິນ</a></li> 
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small"> 
+            <li><a href="{{ route('admin.wallet.thing', 'in') }}" class="link-body-emphasis d-inline-flex text-decoration-none text-white rounded">2.1 ອໍເດິ້ຝາກເງິນ</a></li> 
+            <li><a href="{{ route('admin.wallet.thing', 'out') }}" class="link-body-emphasis d-inline-flex text-decoration-none text-white rounded">2.2 ອໍເດິ້ຖອນເງິນ</a></li> 
           </ul>
         </div> 
       </li>
@@ -49,20 +48,20 @@
         </button>
         <div class="collapse" id="orders-collapse" style="">
           <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a href="{{ route('admin.order') }}" class="link-body-emphasis d-inline-flex text-decoration-none text-white rounded">3.1 ການແທງ</a></li> 
+            <li><a href="{{ route('admin.view.box.c') }}" class="link-body-emphasis d-inline-flex text-decoration-none text-white rounded">3.1 ການແທງ</a></li> 
           </ul>
         </div>
       </li>
       <li class="mb-1">
         <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#create-collapse" aria-expanded="false">
-          4. ສ້າງ
+          4. ເບີ່ງ
         </button>
         <div class="collapse" id="create-collapse" style="">
           <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a href="{{ route('admin.create.box') }}" class="link-body-emphasis d-inline-flex text-decoration-none text-white rounded">4.1 ສ້າງ ງວດເລກ</a></li> 
-            <li><a href="{{ route('admin.order') }}" class="link-body-emphasis d-inline-flex text-decoration-none text-white rounded">4.2 ສ້າງ ລູກຄ້າ</a></li> 
+            <li><a href="{{ route('admin.create.box') }}" class="link-body-emphasis d-inline-flex text-decoration-none text-white rounded">4.1 ເບີ່ງ ງວດເລກ</a></li> 
+            <li><a href="{{ route('admin.user') }}" class="link-body-emphasis d-inline-flex text-decoration-none text-white rounded">4.2 ເບີ່ງ ລູກຄ້າ</a></li> 
           @if(session('admin_status')=="Admin")
-            <li><a href="{{ route('admin.order') }}" class="link-body-emphasis d-inline-flex text-decoration-none text-white rounded">4.3 ສ້າງ Admin</a></li> 
+            <li><a href="{{ route('admin.order') }}" class="link-body-emphasis d-inline-flex text-decoration-none text-white rounded">4.3 ເບີ່ງ Admin</a></li> 
           @else
           @endif
           </ul>
@@ -70,14 +69,13 @@
       </li>
       <li class="mb-1">
         <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#view-collapse" aria-expanded="false">
-          6. ເບີ່ງ
+          6. ອື່ນໆ
         </button>
         <div class="collapse" id="view-collapse" style="">
-          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a href="{{ route('admin.order') }}" class="link-body-emphasis d-inline-flex text-decoration-none text-white rounded">6.1 ເບີ່ງ ງວດເລກ</a></li> 
-            <li><a href="{{ route('admin.order') }}" class="link-body-emphasis d-inline-flex text-decoration-none text-white rounded">6.2 ເບີ່ງ ລູກຄ້າ</a></li> 
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small"> 
+            <li><a href="{{ route('admin.order') }}" class="link-body-emphasis d-inline-flex text-decoration-none text-white rounded">6.1 ເບີ່ງ ລູກຄ້າ</a></li> 
           @if(session('admin_status')=="Admin")
-            <li><a href="{{ route('admin.order') }}" class="link-body-emphasis d-inline-flex text-decoration-none text-white rounded">6.3 ເບີ່ງ Admin</a></li> 
+            <li><a href="{{ route('admin.order') }}" class="link-body-emphasis d-inline-flex text-decoration-none text-white rounded">6.2 ເບີ່ງ Admin</a></li> 
           @else
           @endif
           </ul>

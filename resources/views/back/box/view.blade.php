@@ -44,6 +44,18 @@ body
         <div class="card  notob p-3">
             <div class="card-header  text-center"> 
                 <h3>ລາຍການແທງ</h3> 
+                <select name="" id="filter">
+                    <option value="">ທັງໝົດ</option>
+                    <option value="WING">ວິ້ງ</option>
+                    <option value="TWO">ເລກສອງໂຕ</option>
+                    <option value="THREE">ເລກສາມໂຕ</option>
+                    <option value="FOUR">ເລກສີ່ໂຕ</option>
+                    <option value="FIVE">ເລກຫ້າໂຕ</option>
+                    <option value="HIGHTLOW">ສູງຕໍ່າ</option>
+                    <option value="KICKCOOL">ຄີກຄູ່</option>
+                </select>
+                <input type="text" id="id_search" placeholder="ລະຫັດອໍເດີ້">
+                <button class="btn btn-outline-dark" id="go_search">Go</button>
             </div>
             <div class="card-body p-1">
                 <div class="row">
@@ -112,13 +124,13 @@ body
                                         @php($number = $r->number)
 
                                         @if($r->number == "HIGHT")
-                                        @php($number = "ແທງສູງ")
+                                            @php($number = "ແທງສູງ")
                                         @elseif($r->number == "LOW")
-                                        @php($number = "ແທງຕ່ຳ")
+                                            @php($number = "ແທງຕ່ຳ")
                                         @elseif($r->number == "KICK")
-                                        @php($number = "ແທງຄີກ")
+                                            @php($number = "ແທງຄີກ")
                                         @elseif($r->number == "COOL")
-                                        @php($number = "ແທງຄູ່")
+                                            @php($number = "ແທງຄູ່")
                                         @else
                                         @endif
                                         <tr>
@@ -161,5 +173,18 @@ body
 
 <hr> 
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>  
+<script> 
+    $(document).ready(function() {
+        $('#go_search').click(function(event) {   
+            let filter = $('#filter').val();
+            let id_search = $('#id_search').val(); 
+            let route = "{{ route('box.view.box.search', ['id' => $id, 'filter' => 'FILTER_PLACEHOLDER', 'id_search' => 'ID_SEARCH_PLACEHOLDER']) }}";
+            route = route.replace('FILTER_PLACEHOLDER', filter ? filter : 0);
+            route = route.replace('ID_SEARCH_PLACEHOLDER', id_search ? id_search : 0);
+
+            window.location.href = route;
+        });
+    });
+</script>
 @endsection

@@ -9,6 +9,7 @@ use App\Http\Controllers\AdminloginController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminWalletController;
 use App\Http\Controllers\AdminBoxController;
+use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\Start;
 
 use App\Http\Controllers\AnotherController;
@@ -21,7 +22,7 @@ Route::post('/login-start',[Start::class, 'login_start'])->name('login.start');
 Route::get('/register',[Start::class, 'register'])->name('register');
 Route::post('/register/process',[Start::class, 'register_process'])->name('register.process');
 
-Route::get('/logout',[Start::class, 'logout'])->name('logout');
+Route::get('/logout',[Start::class, 'logout'])->name('logout'); 
 
 Route::middleware('check_login')->group(function () {
     Route::get('/2749/248/0302/4421/{index}',[BuyController::class, 'index'])->name('buy.run');
@@ -66,12 +67,23 @@ Route::middleware('check_admin_login')->group(function () {
     Route::get('/a/l/b/c',[AdminBoxController::class, 'create'])->name('admin.create.box');
     Route::post('/a/l/b/c/p',[AdminBoxController::class, 'create_process'])->name('box.create.start'); 
     
+    Route::get('/a/l/b/v/c',[AdminBoxController::class, 'view_c'])->name('admin.view.box.c');
     Route::get('/a/l/b/v/{id}',[AdminBoxController::class, 'view'])->name('admin.view.box');
+    Route::get('/a/l/b/v/s/{id}/{filter?}/{id_search?}', [AdminBoxController::class, 'view_search'])->name('box.view.box.search');
+
+    Route::get('/a/l/b/v/t/{id}',[AdminBoxController::class, 'view_total'])->name('admin.view.total.box');
 
 
     Route::post('/a/l/b/t/p',[AdminBoxController::class, 'to_tell_process'])->name('box.tell.start'); 
     Route::get('/a/l/b/c/w/{token}',[AdminBoxController::class, 'view_winner'])->name('box.see.winner'); 
 
+    Route::get('/a/l/u',[AdminUserController::class, 'index'])->name('admin.user'); 
+    Route::get('/a/l/u/m/{token}',[AdminUserController::class, 'money'])->name('admin.user.money'); 
+    Route::post('/a/l/u/m/process',[AdminUserController::class, 'money_process'])->name('admin.user.money.process'); 
+
+    Route::get('/a/l/u/e/{token}',[AdminUserController::class, 'edit'])->name('admin.user.edit'); 
+
+    
     
 });
 Route::get('/another',[AnotherController::class, 'index'])->name('another');

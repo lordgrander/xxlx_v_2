@@ -87,7 +87,9 @@ body
                                             <td class="text-right">{{ $r->up }}</td>
                                             <td class="text-right">{{ $r->down }}</td>
                                             <td class="text-right">
-                                                <a href="{{ route('admin.view.box', $r->id) }}">ເບີ່ງການຂາຍ</a>
+                                                <a href="{{ route('admin.view.total.box', $r->id) }}">ເບີ່ງຍອດຂາຍ</a>
+                                                &nbsp;|&nbsp;
+                                                <a href="{{ route('admin.view.box', $r->id) }}">ເບີ່ງການແທງ</a>
                                                 &nbsp;|&nbsp;
                                                 <a href="{{ route('box.see.winner', $r->token) }}">ເບີ່ງຜູ້ຊະນະ</a> 
                                             </td>
