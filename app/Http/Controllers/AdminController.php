@@ -174,4 +174,10 @@ class AdminController extends Controller
             return response()->json(['message' => 'Delete Success',"status"=>"Success"], 200); 
         }
     }
+
+    public function do()
+    {
+        $beta_do = beta_do::orderby('id','DESC')->paginate(50, ['*'], 'page_name') ;
+        return view('back.admin.do',compact('beta_do'));
+    }
 }

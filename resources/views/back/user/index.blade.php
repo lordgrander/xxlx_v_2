@@ -33,7 +33,10 @@
                             <td class="text-right">
                                 <a href="{{ route('admin.user.money', $r->encode) }}">ຈັດການເງິນ</a> |
                                 <a href="{{ route('admin.user.edit', $r->encode) }}">ແກ້ໄຂ</a> |
-                                <a href="{{ route('admin.user.money', $r->encode) }}">ເບີ່ງຂໍ້ມູນ</a>
+                                <a href="{{ route('admin.user.purches', $r->encode) }}">ເບີ່ງການຊື້</a> |
+                                <a href="{{ route('admin.user.statement', $r->encode) }}">ເບີ່ງກະເປົ໋າ</a> |
+                                <a href="{{ route('admin.user.inout', $r->encode) }}">ເບີ່ງແຈ້ງຝາກຖອນ</a> |
+                                <a href="{{ route('admin.user.win', $r->encode) }}">ເບີ່ງປະຫວັດຊະນະ</a> |
                             </td>
                         </tr>
                     @endforeach

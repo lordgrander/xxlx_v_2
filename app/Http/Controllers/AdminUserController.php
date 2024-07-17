@@ -24,6 +24,8 @@ Use App\Models\Users;
 Use App\Models\wallet_transaction;  
 Use App\Models\order_inout;  
 Use App\Models\beta_do;  
+Use App\Models\buy_order;  
+Use App\Models\buy;  
  
 
 class AdminUserController extends Controller
@@ -244,9 +246,53 @@ class AdminUserController extends Controller
            $beta_do->save();
      
            return response()->json(['message' => 'Registration successful',"status"=>"SUCCESS"], 200);
-       }
-
-       
+       } 
    }
 
+
+   public function purches($token)
+   { 
+    $user = Users::where('encode', $token)->first();
+    $buy_order = buy_order::where('user_id', $user->id)->orderby('id','DESC')->paginate(50, ['*'], 'page_name') ;
+
+    return view('back.user.order',compact('buy_order'))->with('user_name',$user->username);
+   }
+
+   public function statement($token)
+   { 
+    $user = Users::where('encode', $token)->first();
+    $wallet_transaction = wallet_transaction::where('user_id', $user->id)->where('status','success')->orderby('id','DESC')->paginate(50, ['*'], 'page_name') ;
+
+
+    $check_money = DB::select("SELECT 
+        c.username AS customer_name, 
+        SUM( CASE WHEN t.type = 'Deposit'
+            THEN t.amount WHEN t.type = 'Win' 
+            THEN t.amount WHEN t.type = 'Withdrawal' 
+            THEN t.amount WHEN t.type = 'Purchase' 
+            THEN t.amount ELSE 0 END 
+        ) AS current_money 
+        FROM users c 
+        JOIN wallet_transaction t 
+        ON c.id = t.user_id 
+        WHERE c.id IN ('". $user->id ."') AND t.status = 'SUCCESS'  GROUP BY c.name;            
+    ");   
+    return view('back.user.statement',compact('wallet_transaction'))->with('user_name',$user->username)->with('check_money',$check_money[0]->current_money);
+   }
+
+   public function inout($token)
+   { 
+    $user = Users::where('encode', $token)->first();
+    $order_inout = order_inout::WHERE('user_id', $user->id)->orderby('id','DESC')->paginate(50, ['*'], 'page_name') ;
+         
+    return view('back.user.inout',compact('order_inout'))->with('user_name',$user->username);
+   }
+   
+   public function win($token)
+   { 
+    $user = Users::where('encode', $token)->first();  
+    $select = buy::where('user_id',$user->id)->where('define','Win')->orderby('id','DESC')->paginate(50, ['*'], 'page_name') ;
+         
+    return view('back.user.win',compact('select'))->with('user_name',$user->username);
+   }
 }

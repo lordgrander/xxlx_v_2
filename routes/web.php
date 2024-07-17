@@ -10,6 +10,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminWalletController;
 use App\Http\Controllers\AdminBoxController;
 use App\Http\Controllers\AdminUserController;
+use App\Http\Controllers\AdminPrizeController;
 use App\Http\Controllers\Start;
 
 use App\Http\Controllers\AnotherController;
@@ -58,6 +59,7 @@ Route::middleware('check_admin_login')->group(function () {
     Route::get('/a/l/withdrawal',[AdminController::class, 'withdrawal'])->name('admin.withdrawal');
     
     Route::get('/a/l/order/list',[AdminController::class, 'order'])->name('admin.order');
+    Route::get('/a/l/do',[AdminController::class, 'do'])->name('admin.do');
     
     Route::get('/a/l/order/wallet/withdraw/{id}/{totken}',[AdminWalletController::class, 'wallet_processing'])->name('admin.withdraw.select');
     Route::post('/a/l/order/wallet/process',[AdminWalletController::class, 'wallet_process_start'])->name('wallet.process.start');
@@ -85,10 +87,14 @@ Route::middleware('check_admin_login')->group(function () {
     Route::post('/a/l/u/e/u/{token}',[AdminUserController::class, 'update'])->name('admin.user.update'); 
 
     Route::get('/a/l/u/c',[AdminUserController::class, 'create'])->name('admin.user.create'); 
-    Route::post('/a/l/u/c/p',[AdminUserController::class, 'create_process'])->name('admin.user.create.process'); 
+    Route::post('/a/l/u/c/p',[AdminUserController::class, 'create_process'])->name('admin.user.create.process');
+    
+    Route::get('/a/l/u/p/{token}',[AdminUserController::class, 'purches'])->name('admin.user.purches'); 
+    Route::get('/a/l/u/m/s/{token}',[AdminUserController::class, 'statement'])->name('admin.user.statement'); 
+    Route::get('/a/l/u/m/io/{token}',[AdminUserController::class, 'inout'])->name('admin.user.inout'); 
+    Route::get('/a/l/u/m/w/{token}',[AdminUserController::class, 'win'])->name('admin.user.win'); 
 
-    
-    
+
     Route::get('/a/l/a/l',[AdminController::class, 'list'])->name('admin.admin'); 
     Route::get('/a/l/a/c',[AdminController::class, 'create'])->name('admin.admin.create'); 
     Route::post('/a/l/a/l/s',[AdminController::class, 'store'])->name('admin.admin.store'); 
@@ -96,6 +102,10 @@ Route::middleware('check_admin_login')->group(function () {
     Route::post('/a/l/a/e/p',[AdminController::class, 'update'])->name('admin.admin.update'); 
     Route::post('/a/l/a/d',[AdminController::class, 'delete'])->name('admin.admin.delete'); 
     
+    Route::get('/a/l/p',[AdminPrizeController::class, 'index'])->name('admin.prize'); 
+    Route::post('/a/l/p/u',[AdminPrizeController::class, 'update'])->name('admin.prize.update'); 
+
+
 });
 Route::get('/another',[AnotherController::class, 'index'])->name('another');
 Route::get('/another/control',[AnotherController::class, 'control'])->name('another.control');

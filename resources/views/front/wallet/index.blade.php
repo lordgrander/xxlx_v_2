@@ -83,8 +83,14 @@
                                 <td class="text-center">ວັນທີ</td>
                             </tr>
                             @foreach($order_inout AS $r)
+                            @php($display='')
+                            @if($r->back_transfer_id==0)
+                                @php($display='')
+                            @else
+                                @php($display=$r->Havebank->name)
+                            @endif
                                 <tr>
-                                    <td class="text-center">{{ $r->Havebank->name }}</td>
+                                    <td class="text-center">{{ $display }}</td>
                                     <td class="text-center">I-{{ $r->id }}</td>
                                     <td class="text-right">{{ number_format($r->total) }} ກີບ</td>
                                     <td class="text-center">

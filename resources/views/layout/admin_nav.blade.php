@@ -73,9 +73,9 @@
         </button>
         <div class="collapse" id="view-collapse" style="">
           <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small"> 
-            <li><a href="{{ route('admin.order') }}" class="link-body-emphasis d-inline-flex text-decoration-none text-white rounded">6.1 ເບີ່ງ ລູກຄ້າ</a></li> 
+            <li><a href="{{ route('admin.prize') }}" class="link-body-emphasis d-inline-flex text-decoration-none text-white rounded">6.1 ລາງວັນ</a></li> 
           @if(session('admin_status')=="Admin")
-            <li><a href="{{ route('admin.order') }}" class="link-body-emphasis d-inline-flex text-decoration-none text-white rounded">6.2 ເບີ່ງ Admin</a></li> 
+            <li><a href="{{ route('admin.do') }}" class="link-body-emphasis d-inline-flex text-decoration-none text-white rounded">6.2 ການເຄື່ອນໄຫວ Admin</a></li> 
           @else
           @endif
           </ul>
@@ -86,11 +86,9 @@
           7. ລາຍງານ
         </button>
         <div class="collapse" id="report-collapse" style="">
-          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a href="{{ route('admin.order') }}" class="link-body-emphasis d-inline-flex text-decoration-none text-white rounded">7.1 ລາຍງານ ຍອດຮັບ</a></li> 
-            <li><a href="{{ route('admin.order') }}" class="link-body-emphasis d-inline-flex text-decoration-none text-white rounded">7.2 ລາຍງານ ຍອດເສຍ</a></li> 
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small"> 
           @if(session('admin_status')=="Admin")
-            <li><a href="{{ route('admin.order') }}" class="link-body-emphasis d-inline-flex text-decoration-none text-white rounded">7.3 ລາຍງານ Admin</a></li> 
+            <li><a href="{{ route('admin.report') }}" class="link-body-emphasis d-inline-flex text-decoration-none text-white rounded">7.1 ລາຍງານ Admin</a></li> 
           @else
           @endif
           </ul>
