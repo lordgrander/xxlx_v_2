@@ -116,17 +116,16 @@ class Start extends Controller
             $customer->phone = $request->input('phone');
             $customer->encode =  date('Ymd').Str::random(20);
             $customer->status =  'ACTIVE';
-            $customer->save(); 
-    
+            $customer->save();  
             
-            $wallet_transaction = new wallet_transaction;
-            $wallet_transaction->user_id = $customer->id;
-            $wallet_transaction->status = "SUCCESS";
-            $wallet_transaction->amount = '500000';
-            $wallet_transaction->type = "Deposit"; 
-            $wallet_transaction->sort = "0";
-            $wallet_transaction->created_at = Carbon::now('Asia/Bangkok');
-            $wallet_transaction->save();
+            // $wallet_transaction = new wallet_transaction;
+            // $wallet_transaction->user_id = $customer->id;
+            // $wallet_transaction->status = "SUCCESS";
+            // $wallet_transaction->amount = '0';
+            // $wallet_transaction->type = "Deposit"; 
+            // $wallet_transaction->sort = "0";
+            // $wallet_transaction->created_at = Carbon::now('Asia/Bangkok');
+            // $wallet_transaction->save();
     
             session(['user_id' => $customer->id, 'user_name' => $customer->user_name, 'status' => $customer->status, 'user_encode' => $customer->encode]);
             // Return a success response

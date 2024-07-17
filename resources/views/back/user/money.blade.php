@@ -72,8 +72,8 @@ body
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="3">
-                                    <a href="{{ redirect()->back() }}" class="btn btn-dark form-control" id="backButton">ກັບຄືນ</a>
+                                <td colspan="3"> 
+                                    <a href="{{ route('admin.user') }}" class="btn btn-dark form-control" id="backButton">ກັບຄືນ</a>
                                 </td>
                             </tr>
                         </table>

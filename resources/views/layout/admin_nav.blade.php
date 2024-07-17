@@ -61,7 +61,7 @@
             <li><a href="{{ route('admin.create.box') }}" class="link-body-emphasis d-inline-flex text-decoration-none text-white rounded">4.1 ເບີ່ງ ງວດເລກ</a></li> 
             <li><a href="{{ route('admin.user') }}" class="link-body-emphasis d-inline-flex text-decoration-none text-white rounded">4.2 ເບີ່ງ ລູກຄ້າ</a></li> 
           @if(session('admin_status')=="Admin")
-            <li><a href="{{ route('admin.order') }}" class="link-body-emphasis d-inline-flex text-decoration-none text-white rounded">4.3 ເບີ່ງ Admin</a></li> 
+            <li><a href="{{ route('admin.admin') }}" class="link-body-emphasis d-inline-flex text-decoration-none text-white rounded">4.3 ເບີ່ງ Admin</a></li> 
           @else
           @endif
           </ul>

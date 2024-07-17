@@ -11,6 +11,7 @@
         <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
             <div class="title text-center">
                 <h4 class="notob">ລາຍການລູກຄ້າ</h4>
+                <a href="{{ route('admin.user.create') }}"><button class="btn btn-danger">ສ້າງລູກຄ້າ</button></a>
             </div> 
                 <table class="table table-bordered table-hover table-striped notob">
                     <tr>

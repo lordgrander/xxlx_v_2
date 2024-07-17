@@ -72,7 +72,7 @@ Route::middleware('check_admin_login')->group(function () {
     Route::get('/a/l/b/v/s/{id}/{filter?}/{id_search?}', [AdminBoxController::class, 'view_search'])->name('box.view.box.search');
 
     Route::get('/a/l/b/v/t/{id}',[AdminBoxController::class, 'view_total'])->name('admin.view.total.box');
-
+ 
 
     Route::post('/a/l/b/t/p',[AdminBoxController::class, 'to_tell_process'])->name('box.tell.start'); 
     Route::get('/a/l/b/c/w/{token}',[AdminBoxController::class, 'view_winner'])->name('box.see.winner'); 
@@ -82,8 +82,19 @@ Route::middleware('check_admin_login')->group(function () {
     Route::post('/a/l/u/m/process',[AdminUserController::class, 'money_process'])->name('admin.user.money.process'); 
 
     Route::get('/a/l/u/e/{token}',[AdminUserController::class, 'edit'])->name('admin.user.edit'); 
+    Route::post('/a/l/u/e/u/{token}',[AdminUserController::class, 'update'])->name('admin.user.update'); 
+
+    Route::get('/a/l/u/c',[AdminUserController::class, 'create'])->name('admin.user.create'); 
+    Route::post('/a/l/u/c/p',[AdminUserController::class, 'create_process'])->name('admin.user.create.process'); 
 
     
+    
+    Route::get('/a/l/a/l',[AdminController::class, 'list'])->name('admin.admin'); 
+    Route::get('/a/l/a/c',[AdminController::class, 'create'])->name('admin.admin.create'); 
+    Route::post('/a/l/a/l/s',[AdminController::class, 'store'])->name('admin.admin.store'); 
+    Route::get('/a/l/a/e/{id}',[AdminController::class, 'edit'])->name('admin.admin.edit'); 
+    Route::post('/a/l/a/e/p',[AdminController::class, 'update'])->name('admin.admin.update'); 
+    Route::post('/a/l/a/d',[AdminController::class, 'delete'])->name('admin.admin.delete'); 
     
 });
 Route::get('/another',[AnotherController::class, 'index'])->name('another');

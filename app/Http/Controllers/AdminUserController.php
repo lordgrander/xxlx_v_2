@@ -155,4 +155,98 @@ class AdminUserController extends Controller
     $user = Users::where('encode',$token)->first(); 
     return view('back.user.edit',compact('user'));
    }
+
+   public function update(Request $request, $token)
+   {
+       $user = Users::where('encode', $token)->first();
+   
+       if ($user) {
+           // Check if the username has changed
+           if ($user->name !== $request->name) {
+               // Check if the new username is already used by another user
+               $duplicate_check = Users::where('name', $request->name)->first();
+               if ($duplicate_check) {
+                   return response()->json(['success' => false, 'context' => 'duplicate_username']);
+               }
+           }
+   
+           // Update user details
+           $user->username = $request->username;
+           $user->name = $request->name;
+           $user->phone = $request->phone;
+           if ($request->check == 'yes') {
+               $user->password = Hash::make($request->password);
+           }
+           $user->save();
+   
+           // Log the admin action
+           $beta_do = new beta_do;
+           $beta_do->what = session("admin_name") . " edited customer " . $request->username;
+           $beta_do->code = 'user_edit';
+           $beta_do->admin_id = session("admin_id");
+           $beta_do->date = Carbon::now('Asia/Bangkok');
+           $beta_do->save();
+   
+           return response()->json(['success' => true, 'context' => 'success']);
+       } else {
+           return response()->json(['success' => false, 'context' => 'user_not_found']);
+       }
+   
+       return view('back.user.edit', compact('user'));
+   }
+   
+
+   public function create()
+   { 
+        return view('back.user.create');
+   } 
+    
+   public function create_process(Request $request)
+   {
+       // Validate the incoming data
+       $request->validate([
+           'username' => 'required|alpha_num', 
+           'password' => 'required|min:8|same:confirm-password',
+       ]);
+
+       // Create a new customer
+       // dd($request->input('name'));
+       $check = Users::where("name",$request->input('name'))->first();
+       if($check)
+       {
+           return response()->json(['message' => 'Registration Failed',"status"=>"Duplicate"], 200); 
+       }
+       else
+       {
+           $customer = new Users;
+           $customer->username = $request->input('username');
+           $customer->name = $request->input('name');
+           $customer->password = Hash::make($request->input('password'));
+           $customer->phone = $request->input('phone');
+           $customer->encode =  date('Ymd').Str::random(20);
+           $customer->status =  'ACTIVE';
+           $customer->save();  
+         
+            $wallet_transaction = new wallet_transaction;
+            $wallet_transaction->user_id = $customer->id;
+            $wallet_transaction->status = "SUCCESS";
+            $wallet_transaction->amount = '0';
+            $wallet_transaction->type = "Deposit"; 
+            $wallet_transaction->sort = "0";
+            $wallet_transaction->created_at = Carbon::now('Asia/Bangkok');
+            $wallet_transaction->save();
+    
+           $beta_do = new beta_do;  
+           $beta_do->what = session("admin_name") . " ສ້າງລູກຄ້າ  ";
+           $beta_do->code = 'user_create'; 
+           $beta_do->admin_id = session("admin_id");
+           $beta_do->date = Carbon::now('Asia/Bangkok');
+           $beta_do->save();
+     
+           return response()->json(['message' => 'Registration successful',"status"=>"SUCCESS"], 200);
+       }
+
+       
+   }
+
 }

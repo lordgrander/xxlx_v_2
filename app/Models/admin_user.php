@@ -16,5 +16,7 @@ class admin_user extends Model
         'login',  
         'password',   
         'status',   
+        'last_login_ip',   
+        'encode',   
     ];
 }
