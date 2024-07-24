@@ -31,6 +31,12 @@
                             <div class="mb-3">
                                 <input type="number" id="phone" class="form-control" value="{{ $user->phone }}" placeholder="ເບີໂທລະສັບ" autocomplete="off" style="border:solid black 2px;">
                             </div>
+                            <div class="mb-3">
+                                 <select name="" id="status" class="form-control" >
+                                    <option value="ACTIVE">ເປີດໃຊ້ງານ</option>
+                                    <option value="BANNED">ປິດໃຊ້ງານ</option>
+                                 </select>
+                            </div>
 
                             <div class="mb-3">
                                  <select name="" id="password_commit" class="form-control" >
@@ -102,6 +108,7 @@
                     phone: $('#phone').val(),
                     password: $('#password').val(),
                     check: $('#password_commit').val(),
+                    status: $('#status').val(),
                     _token: '{{ csrf_token() }}',
                 }
 
@@ -120,6 +127,7 @@
                     name: $('#name').val(), 
                     phone: $('#phone').val(),  
                     check: $('#password_commit').val(),
+                    status: $('#status').val(),
                     _token: '{{ csrf_token() }}',
                 }
             } 
@@ -171,5 +179,14 @@
             });
         });  
     });
+    
+
+    SelectElement("status",    "{{ $user->status }}");  
+
+    function SelectElement(id, valueToSelect)
+    {    
+        var element = document.getElementById(id);
+        element.value = valueToSelect;
+    }
 </script>
 @endsection

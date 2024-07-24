@@ -89,6 +89,7 @@
                             </tr>
                             @php($count=1)
                             @foreach($order_inout AS $r)
+                            @php($cancel_reason='')
                                 <tr>
                                     <td rowspan="2" class="text-center">{{ $r->Havebank->name }}</td>
                                     <td class="text-center">O-{{ $r->id }}</td>
@@ -97,7 +98,11 @@
                                         @if($r->status=='Waiting')
                                             ກຳລັງດຳເນິນການ
                                         @elseif($r->status=='Success')
-                                            ສຳເລັດແລ້ວ
+                                            ສຳເລັດແລ້ວ 
+                                        @elseif($r->status=='Cancel')
+                                            ຍົກເລີກ
+                                            @php($cancel_reason='<u class="text-danger">ສາເຫດ </u>: '.$r->cancel_reason . ' ')
+
                                         @else
 
                                         @endif
@@ -107,9 +112,9 @@
                                 <tr> 
                                     @if($r->img)
                                         <td colspan="2" class="text-left">ເລກບັນຊີ : {{ $r->bank_number }}   </td>
-                                        <td colspan="2" class="text-right">ເບີ່ງ QR ແນບ : <a href="{{ asset($r->img) }}" target="blank">ເບີ່ງ</a></td>
+                                        <td colspan="2" class="text-right">{!! $cancel_reason !!} / ເບີ່ງ QR ແນບ : <a href="{{ asset($r->img) }}" target="blank">ເບີ່ງ</a></td>
                                     @else
-                                        <td colspan="4" class="text-left">ເລກບັນຊີ : {{ $r->bank_number }}</td>
+                                        <td colspan="4" class="text-left"> {!! $cancel_reason !!} /  ເລກບັນຊີ : {{ $r->bank_number }}</td>
                                     @endif
                                 </tr>
                             @endforeach

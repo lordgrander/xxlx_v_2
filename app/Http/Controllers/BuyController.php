@@ -49,7 +49,18 @@ class BuyController extends Controller
            
             if($money)
             {
-                $money = $money[0]->current_money;
+                
+                $ccc = DB::select("SELECT SUM(total) AS total FROM order_inout WHERE user_id = '".session('user_id')."' AND status = 'Waiting' AND type = 'out'");
+        
+                if ($ccc[0]->total != null)  
+                {
+                    $money = $money[0]->current_money - $ccc[0]->total; 
+                }
+                else
+                { 
+                    $money = $money[0]->current_money; 
+                }
+                
             }
             else
             {
@@ -410,7 +421,16 @@ class BuyController extends Controller
            
             if($money)
             {
-                $money = $money[0]->current_money;
+                $ccc = DB::select("SELECT SUM(total) AS total FROM order_inout WHERE user_id = '".session('user_id')."' AND status = 'Waiting' AND type = 'out'");
+        
+                if ($ccc[0]->total != null)  
+                {
+                    $money = $money[0]->current_money - $ccc[0]->total; 
+                }
+                else
+                { 
+                    $money = $money[0]->current_money; 
+                }
             }
             else
             {
@@ -445,7 +465,16 @@ class BuyController extends Controller
            
             if($money)
             {
-                $money = $money[0]->current_money;
+                $ccc = DB::select("SELECT SUM(total) AS total FROM order_inout WHERE user_id = '".session('user_id')."' AND status = 'Waiting' AND type = 'out'");
+        
+                if ($ccc[0]->total != null)  
+                {
+                    $money = $money[0]->current_money - $ccc[0]->total; 
+                }
+                else
+                { 
+                    $money = $money[0]->current_money; 
+                }
             }
             else
             {

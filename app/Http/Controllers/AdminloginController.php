@@ -30,7 +30,9 @@ class AdminloginController extends Controller
 
         if (Hash::check($password, $user->password)) {  
             // Password matches, create session and return response
-            session(['admin_id' => $user->id, 'admin_name' => $user->name, 'admin_status' => $user->status]); 
+            session(['admin_id' => $user->id, 'admin_name' => $user->name, 'admin_status' => $user->status, 'admin_encode' => $user->encode]); 
+            $user->last_login_ip = $request->ip(); // Get the user's IP address
+            $user->save();
                 return response()->json(['success' => true]); 
         } else {
                 return response()->json(['success' => false, 'message' => 'Invalid credentials']); 

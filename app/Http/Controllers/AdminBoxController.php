@@ -408,12 +408,57 @@ class AdminBoxController extends Controller
 
     public function view_total($id)
     {
+        $com = prize::all(); 
+        $get_data = ['WING', 'TWO', 'THREE', 'FOUR', 'FIVE', 'HIGHTLOW', 'KICKCOOL'];
+        // Initialize the array with null values
+        foreach ($get_data as $name) {
+            $get_data[$name] = null;
+        }
+
+        // Map the 'com' values to their respective 'name' keys
+        foreach ($com as $coms) {
+            if (array_key_exists($coms->name, $get_data)) {
+                $get_data[$coms->name] = $coms->com;
+            }
+        }
+        
+        $box = box::where('id',$id)->first();
+       
         $results = Buy::select('user_id', 'name', DB::raw('SUM(price) AS total_price'))
                         ->where('box_id',$id)
                         ->groupBy('user_id', 'name')
                         ->get();
 
-        return view('back.box.total',compact('results'));
+            $request = DB::select('SELECT user_id, name, SUM(price) as total FROM `buy` WHERE box_id = "'.$id.'" GROUP BY user_id, name');
+            $win = DB::select('SELECT user_id,  SUM(price*mul) as total_win FROM `buy` WHERE box_id = "'.$id.'" AND define = "WIN" GROUP BY user_id');
+     
+            $names = ['WING', 'TWO', 'THREE', 'FOUR', 'FIVE', 'HIGHTLOW', 'KICKCOOL'];
+
+            $result = collect($request)
+                ->groupBy('user_id')
+                ->map(function ($group, $userId) use ($names) {
+                    $userTotals = [
+                        'user_id' => $userId
+                    ];
+
+                    foreach ($names as $name) {
+                        $userTotals[$name] = $group->where('name', $name)->sum('total');
+                    }
+
+                    return $userTotals;
+                })
+                ->values()
+                ->all();
+
+            // Fetch usernames
+            $userIds = array_column($result, 'user_id');
+            $users = DB::table('users')->whereIn('id', $userIds)->get()->keyBy('id');
+
+            foreach ($result as &$userResult) {
+                $userResult['username'] = $users[$userResult['user_id']]->username ?? 'Unknown';
+            }
+
+        return view('back.box.total',compact('results','result','get_data','box','win'));
     }
 
 

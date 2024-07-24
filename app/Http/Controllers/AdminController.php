@@ -55,9 +55,19 @@ class AdminController extends Controller
 
     public function list()
     { 
-        $select = admin_user::get();
+        if(session('admin_status')=="Admin") 
+        {
+            $select = admin_user::get();
+            return view('back.admin.index',compact('select'));
 
-        return view('back.admin.index',compact('select'));
+        }
+        else
+        {
+            $select = admin_user::where('id',session('admin_id'))->get(); 
+            return view('back.admin.index',compact('select'));
+
+        }
+
     }
 
     
@@ -95,6 +105,19 @@ class AdminController extends Controller
         }
     }
 
+    public function editpassword($id)
+    { 
+        $select = admin_user::where('encode',$id)->first();
+        if($select)
+        { 
+            return view('back.admin.edit_password',compact('select'))->with('encode',$id);
+        }
+        else
+        {
+            dd('');
+        }
+    }
+
     public function edit($id)
     { 
         $select = admin_user::where('encode',$id)->first();
@@ -115,7 +138,11 @@ class AdminController extends Controller
         $name = $request->name;
         $login = $request->login;
         $encode = $request->encode;
-    
+        if(session('admin_status')=="Normal") 
+        {
+            $encode = session('admin_encode'); 
+            $status = "Normal";
+        }
         $admin_user = admin_user::where('encode', $encode)->first();
     
         if ($admin_user) {
@@ -129,8 +156,7 @@ class AdminController extends Controller
             }
     
             // Update user details
-            $admin_user->name = $name;
-            $admin_user->password = Hash::make($password);
+            $admin_user->name = $name; 
             $admin_user->login = $login;
             $admin_user->status = $status; 
             $admin_user->save();
@@ -138,6 +164,34 @@ class AdminController extends Controller
                 
             $beta_do = new beta_do;  
             $beta_do->what = session("admin_name") . " ແກ້ໄຂ Admin  ". $name;
+            $beta_do->code = 'admin_update'; 
+            $beta_do->admin_id = session("admin_id");
+            $beta_do->date = Carbon::now('Asia/Bangkok');
+            $beta_do->save();
+    
+            return response()->json(['message' => 'Edit Success', "status" => "Success"], 200);
+        } else {
+            return response()->json(['message' => 'User not found', "status" => "Error"], 404);
+        }
+    }
+
+    public function passwordupdate(Request $request)
+    {   
+        $password = $request->password;   
+        $encode = $request->encode;
+        if(session('admin_status')=="Normal") 
+        {
+            $encode = session('admin_encode'); 
+        }
+        $admin_user = admin_user::where('encode', $encode)->first();
+    
+        if ($admin_user) {  
+            // Update user details 
+            $admin_user->password = Hash::make($password); 
+            $admin_user->save(); 
+                
+            $beta_do = new beta_do;  
+            $beta_do->what = session("admin_name") . " ແກ້ໄຂລະຫັດຜ່ານ Admin  ". $admin_user->username;
             $beta_do->code = 'admin_update'; 
             $beta_do->admin_id = session("admin_id");
             $beta_do->date = Carbon::now('Asia/Bangkok');

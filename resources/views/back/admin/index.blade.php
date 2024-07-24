@@ -11,14 +11,19 @@
         <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
             <div class="title text-center">
                 <h4 class="notob">ລາຍການ Admin</h4>
+                @if(session('admin_status')=="Admin") 
                 <a href="{{ route('admin.admin.create') }}"><button class="btn btn-danger">ສ້າງ Admin</button></a>
+                @endif
             </div> 
                 <table class="table table-bordered table-hover table-striped notob">
                     <tr>
                         <th>ຊື່</th> 
                         <th>ໄອດີເຂົ້າລະບົບ</th> 
                         <th>ສະຖານະ</th>
-                        <th>ໄອພີຫຼ້າສຸດ</th>  
+                        
+                        @if(session('admin_status')=="Admin") 
+                            <th>ໄອພີຫຼ້າສຸດ</th>  
+                        @endif
                         <th>ຈັດການ</th>
                     </tr> 
 
@@ -27,11 +32,15 @@
                             <td class="text-center">{{ $r->name }}</td>
                             <td class="text-center">{{ $r->login }}</td>
                             <td class="text-center">{{ $r->status }}</td>  
-                            <td class="text-center">{{ $r->last_login_ip }}</td>   
+                            @if(session('admin_status')=="Admin") 
+                                <td class="text-center">{{ $r->last_login_ip }}</td>   
+                            @endif
                             <td class="text-right"> 
                                 <a href="{{ route('admin.admin.edit', $r->encode) }}">ແກ້ໄຂ</a>  
                                 |
+                                @if(session('admin_status')=="Admin") 
                                 <a href="#" class="delete" id="{{ $r->encode }}">ລືບ</a>  
+                                @endif
                             </td>
                         </tr>
                     @endforeach

@@ -49,7 +49,16 @@ class WalletController extends Controller
            
             if($money)
             {
-                $money = $money[0]->current_money;
+                $ccc = DB::select("SELECT SUM(total) AS total FROM order_inout WHERE user_id = '".session('user_id')."' AND status = 'Waiting' AND type = 'out'");
+        
+                if ($ccc[0]->total != null)  
+                {
+                    $money = $money[0]->current_money - $ccc[0]->total; 
+                }
+                else
+                { 
+                    $money = $money[0]->current_money; 
+                }
             }
             else
             {
@@ -98,6 +107,7 @@ class WalletController extends Controller
                 $order_inout->total  = $money;
                 $order_inout->user_id  = session('user_id');
                 $order_inout->bank_transfer_id  = $bank_transfer_id;
+                $order_inout->token = Str::random(64);
                 $order_inout->save();
                 return response()->json(['status' => '200', 'message' => 'Image uploaded successfully']);
             }
@@ -135,7 +145,16 @@ class WalletController extends Controller
            
             if($money)
             {
-                $money = $money[0]->current_money;
+                $ccc = DB::select("SELECT SUM(total) AS total FROM order_inout WHERE user_id = '".session('user_id')."' AND status = 'Waiting' AND type = 'out'");
+        
+                if ($ccc[0]->total != null)  
+                {
+                    $money = $money[0]->current_money - $ccc[0]->total; 
+                }
+                else
+                { 
+                    $money = $money[0]->current_money; 
+                }
             }
             else
             {
@@ -187,7 +206,8 @@ class WalletController extends Controller
                 $order_inout->total  = $money;
                 $order_inout->bank_number  = $bank_number;
                 $order_inout->user_id  = session('user_id');
-                $order_inout->bank_transfer_id  = $bank_transfer_id;
+                $order_inout->bank_transfer_id  = $bank_transfer_id; 
+                $order_inout->token = Str::random(64);
                 $order_inout->save();
                 return response()->json(['status' => '200', 'message' => 'Image uploaded successfully']);
             }
@@ -211,7 +231,8 @@ class WalletController extends Controller
                 $order_inout->total  = $money;
                 $order_inout->bank_number  = $bank_number;
                 $order_inout->user_id  = session('user_id');
-                $order_inout->bank_transfer_id  = $bank_transfer_id;
+                $order_inout->bank_transfer_id  = $bank_transfer_id; 
+                $order_inout->token = Str::random(64);
                 $order_inout->save();
                 return response()->json(['status' => '200', 'message' => 'uploaded successfully']); 
         }

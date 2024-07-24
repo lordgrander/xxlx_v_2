@@ -48,66 +48,69 @@ body
         <div class="card  notob p-3">
             <div class="card-header  text-center"> 
                 <h3>ລາຍການແທງ</h3> 
+                ງວດວັນທີ : {{ date('d-m-Y',strtotime($box->created_at)) }}
             </div>
             <div class="card-body p-1">
                 <div class="row">
                     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12"> 
-                    <table class="table table-bordered">
-                        
-                            @php($currentUserId = null)
-                            @php($userTotal = 0)
-                            @php($grandTotal = 0)
-                       
 
-                        @foreach($results as $r)
-                                @php($display_text = $r->number)
-
-                                @if($r->name == 'ABC')
-                                @elseif($r->name == 'WING')
-                                @php($display_text = 'ວິ້ງ')
-                                @elseif($r->name == 'TWO')
-                                @php($display_text = 'ເລກສອງໂຕ')
-                                @elseif($r->name == 'THREE')
-                                @php($display_text = 'ເລກສາມໂຕ')
-                                @elseif($r->name == 'FOUR')
-                                @php($display_text = 'ເລກສີ່ໂຕ')
-                                @elseif($r->name == 'FIVE')
-                                @php($display_text = 'ເລກຫ້າໂຕ')
-                                @elseif($r->name == 'HIGHTLOW')
-                                @php($display_text = 'ສູງຕໍ່າ')
-                                @elseif($r->name == 'KICKCOOL')
-                                @php($display_text = 'ຄີກຄູ່')
-                                @else
-                                @endif
-
-                            <tr>
-                                <td>{{ $r->bINUser->username }}</td>
-                                <td class="text-center">{{ $display_text }}</td>          
-                                <td class="text-right">{{ number_format($r->total_price) }} ກີບ</td>
-                            </tr>
- 
-                                @php($userTotal += $r->total_price)
-                                @php($grandTotal += $r->total_price)
-                                @php($currentUserId = $r->user_id)
-                            
-
-                           
-                            @if ($loop->last || $results[$loop->index + 1]->user_id !== $r->user_id)
-                                <tr>
-                                    <td colspan="2"></td>
-                                    <td class="text-right"><u><strong>ຍອດລວມ :</strong> {{ number_format($userTotal) }} ກີບ</u></td>
-                                </tr>
-                                
-                                @php($userTotal = 0)
-                                 
+                    <table class="table table-bordered table-striped table-hover">
+                        <tr>
+                            <td class="text-center">ຊື້ຜູ້ໃຊ້</td> 
+                            <td class="text-center">ວິ້ງ</td>
+                            <td class="text-center">ເລກສອງໂຕ</td>
+                            <td class="text-center">ເລກສາມໂຕ</td>
+                            <td class="text-center">ເລກສີ່ໂຕ</td>
+                            <td class="text-center">ເລກຫ້າໂຕ</td>
+                            <td class="text-center">ສູງຕໍ່າ</td>
+                            <td class="text-center">ຄີກຄູ່</td>
+                            <td class="text-center">ລວມທັງຫມົດ</td>
+                            <td class="text-center">ຫັກຄ່າຄອມ</td>
+                            <td class="text-center">ຄ່າຄອມ</td>
+                            <td class="text-center">ຍອດຊະນະ</td>
+                        </tr>  
+                    @php($total=0)
+                    @php($total_com=0)
+                    @php($total_af_com=0)
+                    @php($total_win=0)
+                    @foreach($result as $r)
+                        @php($win_price = 0)
+                        @foreach($win as $rw)
+                            @if($rw->user_id==$r['user_id'])
+                                @php($win_price = $rw->total_win)
                             @endif
                         @endforeach
                         <tr>
-                            <td class="text-right"  colspan="3" >
-                                <u>ລວມທັງຫມົດ : {{ number_format($grandTotal) }} ກີບ</u>
-                            </td>
+                            <td class="text-center">{{ $r['username'] }} {{ $r['user_id'] }}</td> 
+                            <td class="text-right">{{ number_format($r['WING']) }} ກີບ</td>
+                            <td class="text-right">{{ number_format($r['TWO']) }} ກີບ</td>
+                            <td class="text-right">{{ number_format($r['THREE']) }} ກີບ</td>
+                            <td class="text-right">{{ number_format($r['FOUR']) }} ກີບ</td>
+                            <td class="text-right">{{ number_format($r['FIVE']) }} ກີບ</td>
+                            <td class="text-right">{{ number_format($r['HIGHTLOW']) }} ກີບ</td>
+                            <td class="text-right">{{ number_format($r['KICKCOOL']) }} ກີບ</td>
+                            <td class="text-right">{{ number_format($r['WING']+$r['TWO']+$r['THREE']+$r['FOUR']+$r['FIVE']+$r['HIGHTLOW']+$r['KICKCOOL']) }} ກີບ</td>
+                            <td class="text-right">{{ number_format(($r['WING']*(100-$get_data['WING'])/100) +($r['TWO']*(100-$get_data['TWO'])/100)+($r['THREE']*(100-$get_data['THREE'])/100)+($r['FOUR']*(100-$get_data['FOUR'])/100)+($r['FIVE']*(100-$get_data['FIVE'])/100)+($r['HIGHTLOW']*(100-$get_data['HIGHTLOW'])/100)+($r['KICKCOOL']*(100-$get_data['KICKCOOL'])/100)) }} ກີບ</td>
+                            <td class="text-right">{{ number_format(($r['WING']+$r['TWO']+$r['THREE']+$r['FOUR']+$r['FIVE']+$r['HIGHTLOW']+$r['KICKCOOL'])-(($r['WING']*(100-$get_data['WING'])/100) +($r['TWO']*(100-$get_data['TWO'])/100)+($r['THREE']*(100-$get_data['THREE'])/100)+($r['FOUR']*(100-$get_data['FOUR'])/100)+($r['FIVE']*(100-$get_data['FIVE'])/100)+($r['HIGHTLOW']*(100-$get_data['HIGHTLOW'])/100)+($r['KICKCOOL']*(100-$get_data['KICKCOOL'])/100))) }} ກີບ</td>
+                            <td class="text-right">{{ number_format($win_price) }} ກີບ</td>
                         </tr>
-                    </table>
+                    @php($total+=($r['WING']+$r['TWO']+$r['THREE']+$r['FOUR']+$r['FIVE']+$r['HIGHTLOW']+$r['KICKCOOL'])) 
+
+                    @php($total_com+=(($r['WING']+$r['TWO']+$r['THREE']+$r['FOUR']+$r['FIVE']+$r['HIGHTLOW']+$r['KICKCOOL'])-(($r['WING']*(100-$get_data['WING'])/100) +($r['TWO']*(100-$get_data['TWO'])/100)+($r['THREE']*(100-$get_data['THREE'])/100)+($r['FOUR']*(100-$get_data['FOUR'])/100)+($r['FIVE']*(100-$get_data['FIVE'])/100)+($r['HIGHTLOW']*(100-$get_data['HIGHTLOW'])/100)+($r['KICKCOOL']*(100-$get_data['KICKCOOL'])/100)))) 
+                    @php($total_af_com+=(($r['WING']*(100-$get_data['WING'])/100) +($r['TWO']*(100-$get_data['TWO'])/100)+($r['THREE']*(100-$get_data['THREE'])/100)+($r['FOUR']*(100-$get_data['FOUR'])/100)+($r['FIVE']*(100-$get_data['FIVE'])/100)+($r['HIGHTLOW']*(100-$get_data['HIGHTLOW'])/100)+($r['KICKCOOL']*(100-$get_data['KICKCOOL'])/100)))
+                    @php($total_win+=$win_price)
+                    
+                    @endforeach
+                        <tr>
+                            <td class="text-right"  colspan="12" >
+                                <p><u>ລວມທັງຫມົດ : {{ number_format($total) }} ກີບ</u></p>
+                                <p><u>ລວມຫັກຄ່າຄອມ : {{ number_format($total_af_com) }} ກີບ</u></p>
+                                <p><u>ລວມຄ່າຄອມ : {{ number_format($total_com) }} ກີບ</u></p>
+                                <p><u>ລວມຍອດຊະນະ : {{ number_format($total_win) }} ກີບ</u></p>
+
+                            </td> 
+                        </tr>
+                    </table> 
 
                     </div>  
                 </div>

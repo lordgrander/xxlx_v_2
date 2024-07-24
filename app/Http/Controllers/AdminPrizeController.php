@@ -43,7 +43,27 @@ class AdminPrizeController extends Controller
         
         $beta_do = new beta_do;  
         $beta_do->what = session("admin_name") . " ປັບເງິນລາງວັນ  ". $select->name . ' - ' . $select->type . ' ຈຳນວນ ' .$select->mul;
-        $beta_do->code = 'admin_update'; 
+        $beta_do->code = 'admin_com_update'; 
+        $beta_do->admin_id = session("admin_id");
+        $beta_do->date = Carbon::now('Asia/Bangkok');
+        $beta_do->save();
+
+        return response()->json(['success' => true]); 
+    }
+
+    
+    public function com(Request $request)
+    {
+        $id = $request->id;
+        $val = str_replace(',','',$request->val);
+        $select = prize::where('id',$id)->first();
+        $select->com = $val;
+        $select->save();
+
+        
+        $beta_do = new beta_do;  
+        $beta_do->what = session("admin_name") . " ປັບເງິນຄ່າຄອມ  ". $select->name . ' - ' . $select->type . ' ຈຳນວນ ' .$select->com .'%';
+        $beta_do->code = 'admin_com_update'; 
         $beta_do->admin_id = session("admin_id");
         $beta_do->date = Carbon::now('Asia/Bangkok');
         $beta_do->save();

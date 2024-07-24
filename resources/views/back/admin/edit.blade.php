@@ -14,7 +14,7 @@
             <div style="width:60%;">
                 <div class="card notob p-3 mt-5">
                     <div class="card-header text-center"> 
-                        <h3>ສ້າງສະມາຊິກ </h3>
+                        <h3>ແກ້ໄຂຂໍ້ມູນ </h3>
                     </div>
                     <div class="card-body p-1  "> 
                                     
@@ -27,7 +27,7 @@
                             <input type="text" autocomplete="off" placeholder="ໄອດີເຂົ້າລະບົບ" value="{{ $select->login }}" id="login" class="form-control">
                         </div> 
                         <div class="mb-3">
-                            <select name="" id="status" class="form-control"> 
+                            <select name="" id="status" class="form-control">   
                                 <option value="Admin">Admin</option>
                                 <option value="Normal">Normal</option>
                             </select>
@@ -37,7 +37,7 @@
                     </form>
                         <div class="d-flex justify-content-between">
                         <a href="{{ route('admin.admin') }}" class=" form-control" id="backButton">ກັບຄືນ</a>
-                        <a href="{{ route('admin.admin') }}" class=" form-control" id="backButton">ແກ້ໄຂລະຫັດຜ່ານ</a>
+                        <a href="{{ route('admin.admin.edit.password',$encode) }}" class=" form-control" id="backButton">ແກ້ໄຂລະຫັດຜ່ານ</a>
 
                         </div>
                          
@@ -60,8 +60,7 @@
             // Get the form data
             var formData = {
                 name: $('#name').val(),
-                login: $('#login').val(),
-                password: $('#password').val(),
+                login: $('#login').val(), 
                 status: $('#status').val(),
                 encode: '{{ $encode }}'
             };

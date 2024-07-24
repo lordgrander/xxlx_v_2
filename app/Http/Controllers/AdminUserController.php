@@ -176,6 +176,7 @@ class AdminUserController extends Controller
            $user->username = $request->username;
            $user->name = $request->name;
            $user->phone = $request->phone;
+           $user->status = $request->status; 
            if ($request->check == 'yes') {
                $user->password = Hash::make($request->password);
            }
@@ -227,6 +228,8 @@ class AdminUserController extends Controller
            $customer->phone = $request->input('phone');
            $customer->encode =  date('Ymd').Str::random(20);
            $customer->status =  'ACTIVE';
+           $customer->created_at = Carbon::now('Asia/Bangkok');
+
            $customer->save();  
          
             $wallet_transaction = new wallet_transaction;
@@ -284,7 +287,7 @@ class AdminUserController extends Controller
    { 
     $user = Users::where('encode', $token)->first();
     $order_inout = order_inout::WHERE('user_id', $user->id)->orderby('id','DESC')->paginate(50, ['*'], 'page_name') ;
-         
+          
     return view('back.user.inout',compact('order_inout'))->with('user_name',$user->username);
    }
    

@@ -24,6 +24,7 @@
                     <tr>
                         <th>ຊື່</th>
                         <th>ເງິນລາງວັນ ( ທີ່ຄູນຈຳນວນເງິນ )</th> 
+                        <th>ຄ່າຄອມ ( ເປັນ % )</th> 
                     </tr> 
 
                     @foreach($select As $r)
@@ -52,16 +53,14 @@
                         @elseif($r->type == 'DOWN')
                         @php($display_text_2 = 'ລ່າງ')
                         @else
-                        @endif
-
+                        @endif 
                         <tr>
                             <td class="text-center">{{ $display_text }} - {{ $display_text_2 }}</td> 
                             <td class="text-center"> <input type="text" class="btn btn-dark prize" data-name="{{ $display_text }} - {{ $display_text_2 }}" data-id="{{ $r->id }}" value="{{ number_format($r->mul) }}" onkeyup="javascript:this.value=Comma(this.value);"> </td> 
+                            <td class="text-center"> <input type="text" class="btn btn-dark com" data-name="{{ $display_text }} - {{ $display_text_2 }}" data-id="{{ $r->id }}" value="{{ number_format($r->com) }}" onkeyup="javascript:this.value=Comma(this.value);"> </td> 
                         </tr>
-                    @endforeach
-                     
-                </table> 
-                 
+                    @endforeach 
+                </table>  
         </div> 
     </div>
 </div>
@@ -94,6 +93,38 @@
                             success: function(response) {
                                 if (response.success) { 
                                     alert('ອັບເດັດລາງວັນສຳເລັດ');  
+                                } else {
+                                }
+                            },
+                            error: function(error) {
+                                console.log(error);  
+                            }
+                        });
+                }
+            });
+
+            
+            $('.com').change(function(event) {
+                if(confirm("ຕ້ອງການອັບເດັດເງິນຄ່າຄອມ : " + $(this).attr('data-name') + "?"))
+                {
+                        let formData = {
+                            id: $(this).attr('data-id'), 
+                            val: $(this).val(), 
+                        };
+                        $.ajaxSetup({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            }
+                        }); 
+                        // Send an AJAX request
+                        $.ajax({
+                            type: 'POST',
+                            url: '{{ route('admin.com.update') }}',
+                            data: formData,
+                            dataType: 'json', 
+                            success: function(response) {
+                                if (response.success) { 
+                                    alert('ອັບເດັດຄ່າຄອມສຳເລັດ');  
                                 } else {
                                 }
                             },

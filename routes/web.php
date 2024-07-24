@@ -11,6 +11,7 @@ use App\Http\Controllers\AdminWalletController;
 use App\Http\Controllers\AdminBoxController;
 use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\AdminPrizeController;
+use App\Http\Controllers\AdminReportController;
 use App\Http\Controllers\Start;
 
 use App\Http\Controllers\AnotherController;
@@ -101,10 +102,15 @@ Route::middleware('check_admin_login')->group(function () {
     Route::get('/a/l/a/e/{id}',[AdminController::class, 'edit'])->name('admin.admin.edit'); 
     Route::post('/a/l/a/e/p',[AdminController::class, 'update'])->name('admin.admin.update'); 
     Route::post('/a/l/a/d',[AdminController::class, 'delete'])->name('admin.admin.delete'); 
+    Route::get('/a/l/a/e/p/{id}',[AdminController::class, 'editpassword'])->name('admin.admin.edit.password'); 
+    Route::post('/a/l/a/e/p/u',[AdminController::class, 'passwordupdate'])->name('admin.admin.password.update'); 
     
     Route::get('/a/l/p',[AdminPrizeController::class, 'index'])->name('admin.prize'); 
     Route::post('/a/l/p/u',[AdminPrizeController::class, 'update'])->name('admin.prize.update'); 
-
+    
+    Route::post('/a/l/c/u',[AdminPrizeController::class, 'com'])->name('admin.com.update'); 
+    
+    Route::get('/a/l/p/u',[AdminPrizeController::class, 'update'])->name('admin.report'); 
 
 });
 Route::get('/another',[AnotherController::class, 'index'])->name('another');

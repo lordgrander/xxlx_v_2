@@ -351,10 +351,10 @@
                         <tbody>
                             <tr> 
                                 <td class="text-center"> 
-                                    <input type="text" class="form-control simple-input" id="inputValues" placeholder="ປ້ອນເລກ" value="1,2,3,4,5,6,7,8,9">
+                                    <input type="text" class="form-control simple-input" id="inputValues" placeholder="ປ້ອນເລກ ( ຕົວຢ່າງ 1,2-3 4 5/6[7]8_9|1 )" value="">
                                 </td> 
                                 <td class="text-right"> 
-                                    <input type="text" class="form-control simple-input" placeholder="ຈຳນວນເງິນ" id="set_price" value="0"  onkeyup="javascript:this.value=Comma(this.value);">
+                                    <input type="text" class="form-control simple-input" placeholder="ຈຳນວນເງິນ" id="set_price" value=""  onkeyup="javascript:this.value=Comma(this.value);">
                                 </td> 
                                 <td>
                                     <button class="btn btn-danger" id="goButton">Go</button>

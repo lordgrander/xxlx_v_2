@@ -15,6 +15,7 @@ class prize extends Model
         'type',
         'name',
         'mul', 
+        'com', 
     ];
 
 }

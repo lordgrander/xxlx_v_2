@@ -60,10 +60,9 @@
           <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
             <li><a href="{{ route('admin.create.box') }}" class="link-body-emphasis d-inline-flex text-decoration-none text-white rounded">4.1 ເບີ່ງ ງວດເລກ</a></li> 
             <li><a href="{{ route('admin.user') }}" class="link-body-emphasis d-inline-flex text-decoration-none text-white rounded">4.2 ເບີ່ງ ລູກຄ້າ</a></li> 
-          @if(session('admin_status')=="Admin")
+          
             <li><a href="{{ route('admin.admin') }}" class="link-body-emphasis d-inline-flex text-decoration-none text-white rounded">4.3 ເບີ່ງ Admin</a></li> 
-          @else
-          @endif
+          
           </ul>
         </div>
       </li>
@@ -73,15 +72,15 @@
         </button>
         <div class="collapse" id="view-collapse" style="">
           <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small"> 
+          @if(session('admin_status')=="Admin") 
             <li><a href="{{ route('admin.prize') }}" class="link-body-emphasis d-inline-flex text-decoration-none text-white rounded">6.1 ລາງວັນ</a></li> 
-          @if(session('admin_status')=="Admin")
             <li><a href="{{ route('admin.do') }}" class="link-body-emphasis d-inline-flex text-decoration-none text-white rounded">6.2 ການເຄື່ອນໄຫວ Admin</a></li> 
           @else
           @endif
           </ul>
         </div>
       </li>
-      <li class="mb-1">
+      <!-- <li class="mb-1">
         <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#report-collapse" aria-expanded="false">
           7. ລາຍງານ
         </button>
@@ -93,7 +92,7 @@
           @endif
           </ul>
         </div>
-      </li>
+      </li> -->
       <li class="border-top my-3"></li>
       @if(session('admin_id'))
         <li class="mb-1">
