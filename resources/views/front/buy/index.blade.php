@@ -320,8 +320,7 @@
                 <td colspan="2">
                     <button class="btn btn-danger form-control" id="evenButton">ໝາຍເລກຄູ່</button>
                 </td>
-            </tr>
-             
+            </tr> 
          </table>
       </div>
       <div class="modal-footer"> 
@@ -340,7 +339,7 @@
                     @if($gain_number=='2')
                         <button class="btn btn-danger" id="animal_number">ເລືອກ 2 ປ່ອງ</button>
                         <button class="btn btn-danger" id="animal_number_x">ເລືອກ 3 ປ່ອງ</button>
-                        <button class="btn btn-danger" id="number_odd">ເລກລຸດ</button>
+                        <button class="btn btn-danger" id="number_odd">ເລກຫຼຸດ</button>
                     @else
                     @endif
                 </div>
@@ -350,13 +349,22 @@
                         </thead>
                         <tbody>
                             <tr> 
-                                <td class="text-center"> 
-                                    <input type="text" class="form-control simple-input" id="inputValues" placeholder="ປ້ອນເລກ ( ຕົວຢ່າງ 1,2-3 4 5/6[7]8_9|1 )" value="">
+                                <td class="">
+                                    <h5 class="text-danger">1. ປ້ອນໝາຍເລກ :</h5>
+                                    <div class="d-flex text-center">
+                                        <textarea type="text" class="form-control simple-input" id="inputValues" placeholder="( ຕົວຢ່າງ 1,2-3 4 5/6[7]8_9|1 )" value=""></textarea>
+                                        &nbsp;
+                                        <button id="clearinputValues">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="fill:#dc3545;width:2em;"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z"/></svg>
+                                        </button>
+                                    </div> 
                                 </td> 
                                 <td class="text-right"> 
-                                    <input type="text" class="form-control simple-input" placeholder="ຈຳນວນເງິນ" id="set_price" value=""  onkeyup="javascript:this.value=Comma(this.value);">
+                                    <h5 class="text-danger">&nbsp;</h5>
+                                    <input type="text" class="form-control simple-input" placeholder="ຈຳນວນເງິນ" id="set_price" value=""  onkeyup="javascript:this.value=Comma(this.value);" style="">
                                 </td> 
                                 <td>
+                                    <h5 class="text-danger">&nbsp;</h5>
                                     <button class="btn btn-danger" id="goButton">Go</button>
                                 </td>
                             </tr> 
@@ -369,7 +377,8 @@
         </div> 
         <div class="col-12 mt-2">
             <div class="card notob p-3">
-                <table class="table table-bordered table-hover  ">
+                <h5 class="text-danger">2. ຕາຕະລາງສະແດງ :</h5>
+                <table class="table table-bordered table-hover" style="margin-top:0px;">
                     <thead>
                         <tr> 
                             <th class="text-center"  width="8%"></th>
@@ -382,6 +391,11 @@
                     </tbody>
                     <!-- <tfoot id="badnumberInputsContainer"> 
                     </tfoot> -->
+                      <tfoot id="">
+                        <tr>
+                            <td colspan="4"><button class="btn btn-danger form-control" id="clearData">ລ້າງຕາຕະລາງ</button></td>
+                        </tr> 
+                    </tfoot>
                 </table> 
             </div>
         </div>
@@ -390,7 +404,7 @@
             <div class="card notob"> 
                 <div class="p-3">
                     <div>
-                        <h5 class="text-danger">1. ຕັ້ງລາຄາ :</h5>
+                        <h5 class="text-danger">3. ຕັ້ງລາຄາ :</h5>
                             <button class="btn btn-outline-dark set-all" data-id="1K">1K</button>
                             <button class="btn btn-outline-dark set-all" data-id="5K">5K</button>
                             <button class="btn btn-outline-dark set-all" data-id="10K">10K</button>
@@ -402,7 +416,7 @@
                     </div>
                     <hr>
                     <div>
-                        <h5 class="text-danger">2. ເລືອກແທງ :</h5>
+                        <h5 class="text-danger">4. ເລືອກແທງ :</h5>
                         <select name="pick_type" id="pick_type" class="w-100 btn btn-outline-dark">
                             <option value="UP">ແທງບົນ</option>
                             <option value="DOWN">ແທງລ່າງ</option>
@@ -479,6 +493,15 @@
                 cacu_total();
             });
 
+            $('#clearData').click(function() {
+                $('#numberInputsContainer').empty(); 
+            });
+
+            $('#clearinputValues').click(function() {
+                $('#inputValues').val(''); 
+                $('#inputValues').focus(); 
+            });
+
             $('#pick_type').change(function() { 
                 cacu_total(); 
             });
@@ -533,10 +556,14 @@
 
             document.getElementById('oddButton').addEventListener('click', function() {
                 addOENumbers('odd');
+                $('#overlayx').hide();
+                $('#my-modal-odd').hide();
             });
 
             document.getElementById('evenButton').addEventListener('click', function() {
                 addOENumbers('even');
+                $('#overlayx').hide();
+                $('#my-modal-odd').hide();
             });
 
 
@@ -705,9 +732,11 @@
                                 _token: $('meta[name="csrf-token"]').attr('content') // Ensure the CSRF token is correctly included
                             },
                             success: function(response) {
+                                console.log(response);
                                 if(response.status=='CLOSED')
                                 {
-                                    alert('ຂໍອະໄພປິດການຂາຍແລ້ວ');
+                                    alert('ຂໍອະໄພ '+response.subject+' ປິດການຂາຍແລ້ວ');
+                                    $('#submit_data').prop('disabled','');
                                 }
                                 else
                                 {
@@ -808,14 +837,17 @@
         
         function addOENumbers(type) {
             let numbers = [];
-            for (let i = 1; i <= 99; i++) {
+            for (let i = 0; i <= 99; i++) {
+                let strNum = i.toString().padStart(2, '0'); // Converts the number to a string and pads with 0 if necessary
+                
                 if (type === 'odd' && i % 2 !== 0) {
-                    numbers.push(i);
+                    numbers.push(strNum);
                 } else if (type === 'even' && i % 2 === 0) {
-                    numbers.push(i);
+                    numbers.push(strNum);
                 }
             }
             document.getElementById('inputValues').value = numbers.join(', ');
         }
+
     </script>
 @endsection

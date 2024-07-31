@@ -86,6 +86,10 @@
     </div>
         
     @include('layout.nav')     
+
+    
+        <br><br><br>
+    @include('layout.nav_low')     
 </body>    
         <script>
             $(document).ready(function() {  

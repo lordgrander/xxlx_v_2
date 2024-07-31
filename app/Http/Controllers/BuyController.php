@@ -159,39 +159,61 @@ class BuyController extends Controller
         {
 
         }
-      
+
         $box_id = box::where('status','BUYING')->first();
+
+        $time_check = Carbon::now('Asia/Bangkok');
+        $cutoff_time_down = Carbon::createFromTime(18, 10, 0, 'Asia/Bangkok');
+        $cutoff_time_up = Carbon::createFromTime(18, 30, 0, 'Asia/Bangkok');
+
         if($box_id)
         {
 
         }
         else
         { 
-            return response()->json(['status' => 'CLOSED']);
+            return response()->json(['status' => 'CLOSED','subject' => '']);
         }
         $user_id = session('user_id');
 
         if($pick_type=='UPDOWN')
         {
-            $buy_order = new buy_order;
-            $buy_order->user_id = $user_id;
-            $buy_order->name = $name;
-            $buy_order->type = "UP";
-            $buy_order->percent = $percent;
-            $buy_order->total_price = '0';
-            $buy_order->box_id = $box_id->id;
-            $buy_order->created_at = Carbon::now('Asia/Bangkok');
-            $buy_order->save();
+            if ($time_check->greaterThanOrEqualTo($cutoff_time_down)) {
+                
+                $box_id->c_down = 'OFF';
+                $box_id->save();
+                return response()->json(['status' => 'CLOSED','subject' => 'ລ່າງ']);
+            } else { 
+                    
+                    
+                $buy_orderxo = new buy_order;
+                $buy_orderxo->user_id = $user_id;
+                $buy_orderxo->name = $name;
+                $buy_orderxo->type = "DOWN";
+                $buy_orderxo->percent = $percent;
+                $buy_orderxo->total_price = '0';
+                $buy_orderxo->box_id = $box_id->id;
+                $buy_orderxo->created_at = Carbon::now('Asia/Bangkok');
+                $buy_orderxo->save();
+            }
 
-            $buy_orderxo = new buy_order;
-            $buy_orderxo->user_id = $user_id;
-            $buy_orderxo->name = $name;
-            $buy_orderxo->type = "DOWN";
-            $buy_orderxo->percent = $percent;
-            $buy_orderxo->total_price = '0';
-            $buy_orderxo->box_id = $box_id->id;
-            $buy_orderxo->created_at = Carbon::now('Asia/Bangkok');
-            $buy_orderxo->save();
+            if ($time_check->greaterThanOrEqualTo($cutoff_time_up)) {
+                
+                $box_id->c_up = 'OFF';
+                $box_id->save();
+                return response()->json(['status' => 'CLOSED','subject' => 'ບົນ']);
+            } else {  
+                $buy_order = new buy_order;
+                $buy_order->user_id = $user_id;
+                $buy_order->name = $name;
+                $buy_order->type = "UP";
+                $buy_order->percent = $percent;
+                $buy_order->total_price = '0';
+                $buy_order->box_id = $box_id->id;
+                $buy_order->created_at = Carbon::now('Asia/Bangkok');
+                $buy_order->save(); 
+            } 
+            
     
             // 0 => array:2 [
             //     "number" => "1"
@@ -225,32 +247,43 @@ class BuyController extends Controller
     
                 }
 
-                $buy = new buy;
-                $buy->name = $name; 
-                $buy->buy_order = $buy_order->id;
-                $buy->user_id = $user_id;
-                $buy->number = $number;
-                $buy->price = $price;
-                // $buy->price = '1000';
-                $buy->type = "UP";
-                $buy->box_id =  $box_id->id;
-                $buy->created_at = Carbon::now('Asia/Bangkok');
-                $buy->save();
-                // $total += $r['price'];
-                $total += $price;
+                if ($time_check->greaterThanOrEqualTo($cutoff_time_down)) {
+                 
+                } else { 
+                            
+                    $buyxo = new buy;
+                    $buyxo->buy_order = $buy_orderxo->id;
+                    $buyxo->user_id = $user_id;
+                    $buyxo->number = $number;
+                    $buyxo->price = $price;
+                    // $buyxo->price = '1000';
+                    $buyxo->type = "DOWN";
+                    $buyxo->box_id =  $box_id->id;
+                    $buyxo->created_at = Carbon::now('Asia/Bangkok');
+                    $buyxo->save();
+                    // $total += $r['price'];
+                    $totalxo += $price;
 
-                $buyxo = new buy;
-                $buyxo->buy_order = $buy_orderxo->id;
-                $buyxo->user_id = $user_id;
-                $buyxo->number = $number;
-                $buyxo->price = $price;
-                // $buyxo->price = '1000';
-                $buyxo->type = "DOWN";
-                $buyxo->box_id =  $box_id->id;
-                $buyxo->created_at = Carbon::now('Asia/Bangkok');
-                $buyxo->save();
-                // $total += $r['price'];
-                $totalxo += $price;
+                }
+    
+                if ($time_check->greaterThanOrEqualTo($cutoff_time_up)) {
+                     
+                } else {  
+                    
+                        $buy = new buy;
+                        $buy->name = $name; 
+                        $buy->buy_order = $buy_order->id;
+                        $buy->user_id = $user_id;
+                        $buy->number = $number;
+                        $buy->price = $price;
+                        // $buy->price = '1000';
+                        $buy->type = "UP";
+                        $buy->box_id =  $box_id->id;
+                        $buy->created_at = Carbon::now('Asia/Bangkok');
+                        $buy->save();
+                        // $total += $r['price'];
+                        $total += $price;
+                }    
             }
     
     
@@ -286,6 +319,34 @@ class BuyController extends Controller
         }
         else
         {
+
+
+            if($pick_type=='UP')
+            { 
+                if ($time_check->greaterThanOrEqualTo($cutoff_time_up)) {
+                    $box_id->c_up = 'OFF';
+                    $box_id->save();
+                    return response()->json(['status' => 'CLOSED','subject' => 'ບົນ']);
+                } else { 
+                    
+                }
+            }
+            elseif($pick_type=='DOWN')
+            { 
+                if ($time_check->greaterThanOrEqualTo($cutoff_time_down)) {
+                    $box_id->c_down = 'OFF';
+                    $box_id->save();
+                    return response()->json(['status' => 'CLOSED','subject' => 'ລ່າງ']);
+                } else { 
+                    
+                }
+            }
+            else
+            {
+
+            }
+                
+            
             $buy_order = new buy_order;
             $buy_order->user_id = $user_id;
             $buy_order->name = $name;

@@ -69,7 +69,13 @@ body
                                             <td class="text-center">{{ date('d-m-Y',strtotime($r->created_at)) }}</td>
                                             <td class="text-right"><input type="text" class="form-control" id="up" autocomplete="OFF"></td>
                                             <td class="text-right"><input type="text" class="form-control" id="down" autocomplete="OFF"></td>
-                                            <td class="text-right"><button class="btn btn-danger save_to_tell"  data-id="{{ $r->id }}">ບັນທືກ</button></td>
+                                            <td class="text-right"> 
+                                                <a href="{{ route('admin.view.total.box', $r->id) }}">ເບີ່ງຍອດຂາຍ</a>
+                                                    &nbsp;|&nbsp;
+                                                <a href="{{ route('admin.view.box', $r->id) }}">ເບີ່ງການແທງ</a>
+                                                    &nbsp;|&nbsp;
+                                                <button class="btn btn-danger save_to_tell"  data-id="{{ $r->id }}">ບັນທືກ</button>
+                                            </td>
                                         </tr>
                                     @elseif($r->status=='TELLING')
                                         <tr>

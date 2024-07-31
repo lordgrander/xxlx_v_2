@@ -117,3 +117,101 @@ body {
 }
 
 
+
+
+.a-menu-bar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #171928;
+  /* Change this to your desired background color 034B53*/
+  color: #282830;
+  /* Change this to your desired text color */
+  height: 4rem;
+  /* Adjust the height as needed */
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  opacity: 0.98;
+  /* box-shadow: 0 2px 4px rgb(114 108 108 / 50%); */
+  border-radius: 5px 5px 0px 0px;
+  border-top: 1px solid #b8b8b8 !important;
+  z-index:99;
+  transition: height 0.3s ease; /* Adjust the duration and timing function */
+
+}
+
+.menu-bar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #ffffff;
+  /* Change this to your desired background color 034B53*/
+  color: #717171;
+  /* Change this to your desired text color */
+  height: 4rem;
+  /* Adjust the height as needed */
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  opacity: 0.98;
+  /* box-shadow: 0 2px 4px rgb(114 108 108 / 50%); */
+  border-radius: 5px 5px 0px 0px;
+  border-top: 1px solid #EBEBEB !important;
+  z-index:99;
+  transition: height 0.3s ease; /* Adjust the duration and timing function */
+
+}
+
+.menu-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+  font-size: 9pt;
+  /* font-family:meltie; */
+}
+
+.menu-iconx
+{
+  transition: height 0.3s ease; /* Adjust the duration and timing function */
+  
+}
+
+.active-text
+{
+  color:black !important;
+  fill:black !important;
+}
+/* Style the icons (assuming you are using Font Awesome) */
+.menu-item i {
+  font-size: 24px;
+  margin-bottom: -10px;
+}
+
+.menu-item span{ padding-top: 0px;
+
+}
+
+.menu-text
+{
+  transition: size 0.2s ease; /* Adjust the duration and timing function */
+}
+/* Optional: Add some hover effects or active styles for better user experience */
+.menu-item:hover {
+  
+  /* Change this to your desired hover background color 034B53*/
+}
+
+.text-primary
+{
+  color:#84d958!important;
+}
+
+a{
+  color:#282830;
+  text-decoration: none;
+  cursor:pointer;
+}
+

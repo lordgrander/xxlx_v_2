@@ -79,6 +79,7 @@
                         <select name="pick_type" id="pick_type" class="w-100 btn btn-outline-dark">
                             <option value="UP">ແທງບົນ</option>
                             <option value="DOWN">ແທງລ່າງ</option>
+                            <option value="UPDOWN">ບົນ+ລ່າງ</option>
                         </select> 
                     </div>
                     <hr>
@@ -150,6 +151,12 @@
                 }
                 cacu_total();
             });
+
+            
+            $('#pick_type').change(function() { 
+                cacu_total(); 
+            });
+            
             $('#goButton').click(function() {
                 var inputValues = $('#inputValues').val();
                 var set_price = $('#set_price').val();
@@ -246,11 +253,19 @@
                             success: function(response) {
                                 if(response.status=='CLOSED')
                                 {
-                                    alert('ຂໍອະໄພປິດການຂາຍແລ້ວ');
+                                    alert('ຂໍອະໄພ '+response.subject+' ປິດການຂາຍແລ້ວ');
+                                    $('#submit_data').prop('disabled','');
                                 }
                                 else
-                                {
-                                    window.location.href = '{{ url('/2749/248/0302/4421/7799/778') }}/'+ response.order; 
+                                { 
+                                    if(response.status=='DOUBLE')
+                                    {
+                                        window.location.href = '{{ url('/2749/248/0302/4421/7799/778') }}/'+ response.order_one + '/' + response.order_two;   
+                                    }
+                                    else
+                                    {
+                                        window.location.href = '{{ url('/2749/248/0302/4421/7799/778') }}/'+ response.order;  
+                                    }
                                 }
                                 
                             },
@@ -324,8 +339,18 @@
                     } else {
                      
                     }
-                });
-                $('#display_total').html('ລວມ  : ' + number_format(total,'','',',') + ' ກີບ');
+                }); 
+
+                if($('#pick_type').val()=='UPDOWN')
+                {
+                    $('#display_total').html('ລວມ  : ' + number_format(total*2,'','',',') + ' ກີບ (ບົນ + ລ່າງ)'); 
+                    return total*2;
+                }
+                else
+                {
+                    $('#display_total').html('ລວມ  : ' + number_format(total,'','',',') + ' ກີບ');  
+                    return total;
+                } 
             
             return total;
         }
